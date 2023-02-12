@@ -5,6 +5,8 @@ import org.hibernate.annotations.Filter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.sql.Date;
+
 @Document
 public class User {
 
@@ -14,6 +16,12 @@ public class User {
     private String firstName;
     @Field
     private String lastName;
+
+    private Date birthday;
+
+    private String description;
+
+
     public User() {}
 
     public User(String firstName, String lastName) {

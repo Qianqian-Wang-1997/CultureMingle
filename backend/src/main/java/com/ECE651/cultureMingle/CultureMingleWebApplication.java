@@ -19,12 +19,10 @@ public class CultureMingleWebApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(CultureMingleWebApplication.class, args);
 	}
-
 	@Override
 	public void run(String... args) throws Exception {
 
 		if(userRepository.findAll().isEmpty()){
-
 			userRepository.save(new User("Aosen", "Xiong"));
 			userRepository.save(new User("Aric", "Xiong"));
 		}
