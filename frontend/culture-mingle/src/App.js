@@ -1,17 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+
+import Home from "./components/Home"
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello, culture mingler!
-        </p>
-      </header>
+    <div>
+      <Navigation></Navigation>
+      <Home></Home>
     </div>
-  );
+
+  )
 }
 
 export default App;
