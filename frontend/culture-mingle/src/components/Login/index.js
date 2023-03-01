@@ -1,5 +1,10 @@
+import axios from 'axios';
 import { Layout, Space } from 'antd';
-import { Button, Form, Input, Select } from 'antd';
+import  { HeartFilled, HeartOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Select, DatePicker } from 'antd';
+import { useState } from 'react';
+import moment from 'moment';
+import dayjs from 'dayjs';
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {
@@ -11,14 +16,13 @@ const headerStyle = {
     backgroundColor: '#7dbcea',
 };
 const contentStyle = {
-    textAlign: 'center',
     minHeight: 500,
     lineHeight: '120px',
     color: '#fff',
     backgroundColor: '#FFFFFF',
 };
 const siderStyle = {
-    textAlign: 'center',
+    textalign: 'center',
     lineHeight: '120px',
     color: '#fff',
     backgroundColor: '#3ba0e9',
@@ -36,61 +40,83 @@ const layout = {
         span: 16,
     },
     textAlign: 'center'
-
 };
 const tailLayout = {
     wrapperCol: {
         offset: 8,
         span: 16,
     },
+    textAlign: 'center',
 };
 
 const Login = () => {
     const [form] = Form.useForm();
+    const [name,setName] = useState("");
+    const [email,setEmail] = useState("");
+    const [password, setPassWord] = useState("");
+    const [day,setDay] = useState("");
+    const [gender, setGender] = useState("");
+
+    // const [birthday,setBirthday] = useState(""); 
+    // const handleDate = (date, dateString) => {
+    //     setBirthday(dateString);
+    //     console.log(date, dateString);
+    //     console.log("birthday"+birthday);
+    //   };
+    const wholeform = {
+        name:name,
+        email:email,
+        password,password,
+        day:day,
+        gender:gender
+    }
     const onFinish = (values) => {
+        console.log(wholeform);
         console.log(values);
     };
     const onReset = () => {
         form.resetFields();
     };
     const onGenderChange = (values) => {
+        setGender(values);
         console.log(values);
     }
+
     return (
-        <Space
-            direction="vertical"
-            style={{
-                width: '100%',
-            }}
-            size={[0, 48]}
-        >
+        <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
             <Layout>
                 <Header style={headerStyle}>Header</Header>
                 <Content style={contentStyle} >
-                    <div style={{ textAlign: 'center', margin: 'auto', width: '50%', padding: '50px' }}>
-
-                        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}
-                            style={{
-                                     maxWidth: 600,
-                            }}
-                        >
-                            <Form.Item name="name" label="Name"
+                    <div style={{ textalign: 'center', margin: 'auto', width: '50%', padding: '50px' }}>
+                        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} style={{ maxWidth: 600, }}>
+                            <Form.Item name="name" label="Name" rules={[{ required: true, },]} onChange={(e)=>setName(e.target.value)}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name="email" label="E-mail"
                                 rules={[
-                                    {
-                                        required: true,
-                                    },
+                                    { required: true, message:"Please input your email address.",},
+                                    { type:'email', message:"Please input a valid email address."}
                                 ]}
+                                onChange={(e)=>setEmail(e.target.value)}
                             >
                                 <Input />
                             </Form.Item>
-
-                            <Form.Item name="gender" label="Gender"
+                            <Form.Item name='password' label="Password"
                                 rules={[
-                                    {
-                                        required: true,
-                                    },
+                                    {required: true}
+                                ]}
+                                onChange={(e)=>setPassWord(e.target.value)}
+                            >
+                                <Input.Password/>
+                            </Form.Item>
+                            <Form.Item name='birthday' label="Date of birth" 
+                                rules={[
+                                    {required: true}
                                 ]}
                             >
+                                <DatePicker onChange={(e)=>setDay(e.format("YYYY-MM-DD"))}></DatePicker>
+                            </Form.Item>
+                            <Form.Item name="gender" label="Gender" rules={[{ required: true, },]}>
                                 <Select placeholder="Select a option and change input text above" onChange={onGenderChange} allowClear>
                                     <Option value="male">male</Option>
                                     <Option value="female">female</Option>
@@ -127,7 +153,6 @@ const Login = () => {
                                     Reset
                                 </Button>
                             </Form.Item>
-
                         </Form>
                     </div>
                 </Content>
