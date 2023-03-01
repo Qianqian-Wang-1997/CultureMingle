@@ -38,33 +38,35 @@ const items = [
   // ])
 ];
 
-// function show
-
 const Home = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }}>
-          <BulbOutlined style={{color: 'white'}}/>
-         { !collapsed ? <div style={{ color: 'white', display: 'inline-block', font: 'icon' }}>Culture Mingle</div> : <></>}
-        </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
-      <Layout className="site-layout">
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '20px 16px' }}>
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            I dont want to do this
+      <Layout  style={{ minHeight: '100vh' }}>
+        <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+          <div className='background' style={{ height: 32, margin: 16 }}>
+            <BulbOutlined style={{ color: 'white' }} />
+            {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>}
           </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Culture Mingle ©2023 Created in Waterloo</Footer>
+          <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        </Sider>
+        <Layout >
+          <Header theme='light' className='header'>
+            Culture Mingle
+          </Header>
+          <Content className='background'>
+            <div style={{ padding: 24, minHeight: 360}}>
+              <p> test </p>
+            </div>
+          </Content>
+          {/* <Footer style={{ textAlign: 'center' }}>Culture Mingle ©2023 Created in Waterloo</Footer> */}
+        </Layout>
       </Layout>
-    </Layout>
+
   );
 };
 

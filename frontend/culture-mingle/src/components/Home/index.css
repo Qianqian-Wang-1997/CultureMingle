@@ -1,0 +1,22 @@
+.layout {
+    /* background-color: white !important; */
+}
+.logo {
+    color: white; 
+    display: inline-block;
+    font: icon
+}
+.header {
+    text-align: center;
+    color: bisque;
+    font-weight: bolder;
+    /* background-color: white !important; */
+}
+.background {
+    opacity: 0.8;
+    background: url(/public/homepage.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+ }

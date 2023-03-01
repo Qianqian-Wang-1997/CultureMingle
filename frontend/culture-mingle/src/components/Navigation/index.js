@@ -1,9 +1,7 @@
 import React from 'react';
-
-function Navigation () {
+function Navigation() {
     return (
         <div>
-            
         </div>
     )
 }
