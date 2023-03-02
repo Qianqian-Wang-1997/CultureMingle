@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
+import EventList from '../EventList/index'
 import {
   DesktopOutlined,
   SearchOutlined,
@@ -49,7 +50,7 @@ const Home = () => {
       <Layout  style={{ minHeight: '100vh' }}>
         <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <div style={{ height: 32, margin: 16 }}>
-            <BulbOutlined style={{ color: 'black' }} />
+            {/* <BulbOutlined style={{ color: 'black' }} /> */}
             {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>}
           </div>
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
@@ -60,7 +61,8 @@ const Home = () => {
           </Header>
           <Content className='background'>
             <div style={{ padding: 24, minHeight: 360}}>
-              <p> test </p>
+              {/* <p> some program list </p> */}
+              <EventList></EventList>
             </div>
           </Content>
           {/* <Footer style={{ textAlign: 'center' }}>Culture Mingle ©2023 Created in Waterloo</Footer> */}
