@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,15 @@ public class Activity {
 
     private List<String> attendees;
 
-    private boolean status = true;
+    public Activity() {}
+
+    public Activity(String title, Date time, String location, String description) {
+        this.title = title;
+        this.time = time;
+        this.location = location;
+        this.description = description;
+        this.attendees = new ArrayList<String>();
+    }
 
     public Activity(String title, Date time, String location, String description, List<String> attendees) {
         this.title = title;
@@ -34,5 +43,10 @@ public class Activity {
         this.location = location;
         this.description = description;
         this.attendees = attendees;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\nActivity\nid: %s\ntitle: %s\n", id, title);
     }
 }

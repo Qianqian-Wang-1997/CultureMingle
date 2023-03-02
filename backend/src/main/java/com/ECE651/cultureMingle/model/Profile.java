@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document("profiles")
+@Document
 @Getter
 @Setter
 public class Profile {

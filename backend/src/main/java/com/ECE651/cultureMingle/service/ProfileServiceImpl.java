@@ -1,9 +1,9 @@
 package com.ECE651.cultureMingle.service;
 
+import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
 import com.ECE651.cultureMingle.model.Profile;
 import com.ECE651.cultureMingle.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +24,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile updateProfile(Profile profile) {
-        Optional<Profile> profileDb = this.profileRepository.findById(profile.getId());
+        Optional<Profile> profileDb = profileRepository.findById(profile.getId());
 
         if (profileDb.isPresent()) {
             Profile profileUpdate = profileDb.get();
@@ -44,12 +44,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<Profile> getAllProfile() {
-        return this.profileRepository.findAll();
+        return profileRepository.findAll();
     }
 
     @Override
     public Profile getProfileById(String id) {
-        Optional<Profile> profileDb = this.profileRepository.findById(id);
+        Optional<Profile> profileDb = profileRepository.findById(id);
 
         if (profileDb.isPresent()) {
             return profileDb.get();
@@ -60,10 +60,10 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void deleteProfile(String id) {
-        Optional<Profile> profileDb = this.profileRepository.findById(id);
+        Optional<Profile> profileDb = profileRepository.findById(id);
 
         if (profileDb.isPresent()) {
-            this.profileRepository.delete(profileDb.get());
+            profileRepository.delete(profileDb.get());
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + id);
         }

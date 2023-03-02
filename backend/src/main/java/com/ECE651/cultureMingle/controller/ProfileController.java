@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ProductController {
+public class ProfileController {
 
     @Autowired
     private ProfileService profileService;
@@ -27,18 +27,18 @@ public class ProductController {
 
     @PostMapping("/profiles")
     public ResponseEntity<Profile> createProfile(@RequestBody Profile profile) {
-        return ResponseEntity.ok().body(this.profileService.createProfile(profile));
+        return ResponseEntity.ok().body(profileService.createProfile(profile));
     }
 
     @PutMapping("/profiles/{id}")
     public ResponseEntity<Profile> updateProfile(@PathVariable String id, @RequestBody Profile profile) {
         profile.setId((id));
-        return ResponseEntity.ok().body(this.profileService.updateProfile(profile));
+        return ResponseEntity.ok().body(profileService.updateProfile(profile));
     }
 
     @DeleteMapping("/profiles/{id}")
     public HttpStatus deleteProfile(@PathVariable String id) {
-        this.profileService.deleteProfile(id);
+        profileService.deleteProfile(id);
         return HttpStatus.OK;
     }
 }
