@@ -48,8 +48,8 @@ const Home = () => {
   return (
       <Layout  style={{ minHeight: '100vh' }}>
         <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <div className='background' style={{ height: 32, margin: 16 }}>
-            <BulbOutlined style={{ color: 'white' }} />
+          <div style={{ height: 32, margin: 16 }}>
+            <BulbOutlined style={{ color: 'black' }} />
             {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>}
           </div>
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
