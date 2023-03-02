@@ -1,12 +1,9 @@
 package com.ECE651.cultureMingle.repository;
 
-import com.ECE651.cultureMingle.dto.activities;
-import org.springframework.data.mongodb.repository.Query;
-// name : activity repository
-// status: on going
-public interface activityRepository {
+import com.ECE651.cultureMingle.model.Activity;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-    @Query("{name:'?0}")
-    activities findActivityById(String id);
-
+@Repository
+public interface ActivityRepository extends MongoRepository<Activity, String> {
 }
