@@ -1,4 +1,4 @@
-import "./login.css"
+import "./registration.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
 import { EditFilled, HeartFilled, HeartOutlined } from '@ant-design/icons';
@@ -50,7 +50,7 @@ const tailLayout = {
     textAlign: 'center',
 };
 
-const Login = () => {
+const Registration = () => {
     const [form] = Form.useForm();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -214,4 +214,4 @@ const Login = () => {
         </Space>
     )
 };
-export default Login;
+export default Registration;
