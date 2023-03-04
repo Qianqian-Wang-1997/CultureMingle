@@ -3,6 +3,12 @@ import { ConfigProvider } from 'antd';
 
 import Home from "./components/Home"
 import Navigation from "./components/Navigation";
+import { DatePicker} from 'antd';
+import Login from "./components/Login";
+import Registration from "./components/Registration";
+const onChange = (date, dateString) => {
+  console.log(date, dateString);
+};
 
 function App() {
   
@@ -17,6 +23,7 @@ function App() {
     <div>
       {/* <Navigation></Navigation> */}
       <Home></Home>
+      <Registration></Registration>
     </div>
 </ConfigProvider>
   )
