@@ -34,6 +34,7 @@ public class ActivityServiceImpl implements ActivityService {
             activityUpdate.setLocation(activity.getLocation());
             activityUpdate.setDescription(activity.getDescription());
             activityUpdate.setAttendees(activity.getAttendees());
+            activityRepository.save(activity);
             return activityUpdate;
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + activity.getId());
