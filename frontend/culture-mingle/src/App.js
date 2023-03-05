@@ -22,7 +22,7 @@ function App() {
   >
     <div>
       {/* <Navigation></Navigation> */}
-      <Home></Home>
+      
       <Registration></Registration>
     </div>
 </ConfigProvider>

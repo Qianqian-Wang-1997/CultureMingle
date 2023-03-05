@@ -73,7 +73,7 @@ const Registration = () => {
     }
     const onFinish = async(e) => {
         console.log(wholeform);
-        console.log(e);
+        //console.log(e);
         try {
             axios.post(
                 'http://localhost:8080/register/',
