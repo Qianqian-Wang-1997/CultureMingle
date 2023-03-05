@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {
-    textAlign: 'center',
+    textalign: 'center',
     color: '#fff',
     height: 64,
     paddingInline: 50,
@@ -20,7 +20,7 @@ const contentStyle = {
     minHeight: 500,
     lineHeight: '120px',
     backgroundColor: '#FFFFFF',
-    testAlign: 'center'
+    textalign: 'center'
 };
 const siderStyle = {
     textalign: 'center',
@@ -29,7 +29,7 @@ const siderStyle = {
     backgroundColor: 'pink',
 };
 const footerStyle = {
-    textAlign: 'center',
+    textalign: 'center',
     color: '#fff',
     backgroundColor: 'black',
 };
@@ -40,14 +40,14 @@ const layout = {
     wrapperCol: {
         span: 16,
     },
-    textAlign: 'center'
+    textalign: 'center'
 };
 const tailLayout = {
     wrapperCol: {
         offset: 8,
         span: 16,
     },
-    textAlign: 'center',
+    textalign: 'center',
 };
 
 const Registration = () => {
@@ -65,16 +65,32 @@ const Registration = () => {
     //     console.log("birthday"+birthday);
     //   };
     const wholeform = {
-        name: name,
+        username: name,
         email: email,
-        password, password,
-        day: day,
+        password: password,
+        birthday: day,
         gender: gender
     }
-    const onFinish = (values) => {
+    const onFinish = async(e) => {
         console.log(wholeform);
-        console.log(values);
+        console.log(e);
+        try {
+            axios.post(
+                'http://localhost:8080/register/',
+                wholeform,
+            ).then(
+                res=>{
+                    console.log(res);
+                    console.log(res.data);
+                }
+            )
+        } catch (err) {
+            console.log(err);
+        }
     };
+    const handleSubmit = async(e)=>{
+        console.log("submit");
+    }
     const onReset = () => {
         form.resetFields();
     };
@@ -86,18 +102,18 @@ const Registration = () => {
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
             <Layout>
-                <Header class="headerstyle">
+                <Header style={headerStyle}>
                     <Content></Content>
                 </Header>
                 <Layout>
                     <Sider style={siderStyle} width={'10%'}></Sider>
                     <Content style={contentStyle} >
-                        <div class="logo">
+                        <div className="logo">
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                             CultureMingle
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                         </div>
-                        <div class="content">
+                        <div className="content">
                             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} style={{ maxWidth: 600, fontFamily: 'fantasy', fontSize: '25px' }} size="large">
                                 {/* name */}
                                 <Form.Item name="name" label="Name"
@@ -190,16 +206,16 @@ const Registration = () => {
 
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
-                                    <Button type="primary" htmlType="submit" style={{ background: "pink" }}>
+                                    <Button type="primary" htmlType="submit" style={{ background: "pink" }} onSubmit = {handleSubmit}>
                                         Submit
                                     </Button>
                                     <Button htmlType="button" onClick={onReset} style={{ background: "white" }}>
                                         Reset
                                     </Button>
-                                    <div class="hint">
+                                    <div className="hint">
                                         Already have an account?
                                         <br/>
-                                        <a href="">Log in here.</a>
+                                        <a href="https://www.baidu.com">Log in here.</a>
                                     </div>
                                     
                                 </Form.Item>
