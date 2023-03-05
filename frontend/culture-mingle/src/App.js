@@ -11,7 +11,7 @@ const onChange = (date, dateString) => {
 function App() {
   return (
     <div>
-      <Home></Home>
+      
     </div>
 
   )
