@@ -65,7 +65,7 @@ label{
 .contentstyle{
   min-height: 500px;
   line-height: 120px;
-  background-color: black;
+  background-color: #fff;
   text-align: center;
 }
 .siderstyle{
@@ -87,4 +87,9 @@ label{
   text-align: center;
   font-family:Fantasy;
   font-size: 15px;
+}
+.formstyle{
+  max-width: 600px;
+  font-family: fantasy;
+  font-size: 25px;
 }
