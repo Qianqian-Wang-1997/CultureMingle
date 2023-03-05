@@ -53,3 +53,9 @@
     margin-left: 8%;
     margin-bottom: 60px;
 }
+
+.shares{
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+}
