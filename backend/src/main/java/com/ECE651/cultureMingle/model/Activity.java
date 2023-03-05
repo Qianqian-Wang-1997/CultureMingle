@@ -1,6 +1,8 @@
 package com.ECE651.cultureMingle.model;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +19,7 @@ public class Activity {
     @Id
     private String id;
 
+    @NotBlank
     private String title;
 
     private Date time;
