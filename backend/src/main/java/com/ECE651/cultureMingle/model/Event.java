@@ -51,6 +51,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("\nActivity\nid: %s\ntitle: %s\n", id, title);
+        return String.format("\nEvent\nid: %s\ntitle: %s\n", id, title);
     }
 }

@@ -15,28 +15,28 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/activities")
+    @GetMapping("/events")
     public ResponseEntity<List<Event>> getAllActivity() {
         return ResponseEntity.ok().body(eventService.getAllActivity());
     }
 
-    @GetMapping("/activities/{id}")
+    @GetMapping("/events/{id}")
     public ResponseEntity<Event> getActivityById(@PathVariable String id) {
         return ResponseEntity.ok().body(eventService.getActivityById(id));
     }
 
-    @PostMapping("/activities")
+    @PostMapping("/events")
     public ResponseEntity<Event> createActivity(@RequestBody Event event) {
         return ResponseEntity.ok().body(eventService.createActivity(event));
     }
 
-    @PutMapping("/activities/{id}")
+    @PutMapping("/events/{id}")
     public ResponseEntity<Event> updateActivity(@PathVariable String id, @RequestBody Event event) {
         event.setId(id);
         return ResponseEntity.ok().body(eventService.updateActivity(event));
     }
 
-    @DeleteMapping("/activities/{id}")
+    @DeleteMapping("/events/{id}")
     public HttpStatus deleteActivity(@PathVariable String id) {
         eventService.deleteActivity(id);
         return HttpStatus.OK;
