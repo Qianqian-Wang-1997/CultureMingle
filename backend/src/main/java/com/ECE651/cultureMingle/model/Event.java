@@ -15,7 +15,7 @@ import java.util.List;
 @Document
 @Setter
 @Getter
-public class Activity {
+public class Event {
 
     @Id
     private String id;
@@ -31,9 +31,9 @@ public class Activity {
 
     private List<Pair<String, Role>> attendees;
 
-    public Activity() {}
+    public Event() {}
 
-    public Activity(String title, Date time, String location, String description) {
+    public Event(String title, Date time, String location, String description) {
         this.title = title;
         this.time = time;
         this.location = location;
@@ -41,7 +41,7 @@ public class Activity {
         this.attendees = new ArrayList<Pair<String, Role>>();
     }
 
-    public Activity(String title, Date time, String location, String description, List<Pair<String, Role>> attendees) {
+    public Event(String title, Date time, String location, String description, List<Pair<String, Role>> attendees) {
         this.title = title;
         this.time = time;
         this.location = location;
