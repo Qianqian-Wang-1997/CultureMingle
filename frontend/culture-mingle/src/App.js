@@ -21,13 +21,8 @@ function App() {
     }}
   >
     <div>
-<<<<<<< HEAD
-      
-=======
       {/* <Navigation></Navigation> */}
-      
       <Registration></Registration>
->>>>>>> song
     </div>
 </ConfigProvider>
   )
