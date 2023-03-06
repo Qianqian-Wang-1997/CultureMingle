@@ -16,13 +16,12 @@ function App() {
     <ConfigProvider
     theme={{
       token: {
-        colorPrimary: '#50a8e8',
+        colorPrimary: '#f7629e',
       },
     }}
   >
     <div>
-      {/* <Navigation></Navigation> */}
-      <Registration></Registration>
+      <Home></Home>
     </div>
 </ConfigProvider>
   )
