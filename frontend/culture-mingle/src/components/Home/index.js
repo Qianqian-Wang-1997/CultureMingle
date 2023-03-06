@@ -70,6 +70,7 @@ const Home = () => {
             <EventList></EventList>
             <p className='content-title'>Popular groups</p>
             <p className='content-title'>Get Started</p>
+            cover version
           </div>
         </Content>
         <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
