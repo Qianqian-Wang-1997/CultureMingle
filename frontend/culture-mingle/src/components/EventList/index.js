@@ -1,8 +1,10 @@
 import React from 'react';
+import EventComponent from './EventComponent';
 function EventList() {
     return (
         <div>
-            eventlist
+            <EventComponent></EventComponent>
+            <EventComponent></EventComponent>
         </div>
     )
 }
