@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './index.css';
+import styles from './index.module.css';
 import EventList from "../EventList/index"
 import {
   DesktopOutlined,
@@ -42,8 +42,8 @@ const items = [
 const Home = () => {
   const [collapsed, setCollapsed] = useState(true);
 
-  return (
-    <Layout className='layout'>
+  return ( 
+    <Layout className={styles.homeLayout}>
       <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div style={{ height: 32, margin: 16 }}>
           {/* {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>} */}
@@ -51,29 +51,28 @@ const Home = () => {
         <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout >
-        <Header theme='light' className='header'>
+        <Header theme='light' className={styles.header}>
           <Row>
-            <Col span={18} order={1} className='header-logo'>
+            <Col span={18} order={1} className={styles.headerLogo}>
               Culture Mingle
             </Col>
             <Col span={3} order={2}>
-              <Button className='header-button' type="primary">login</Button>
+              <Button className={styles.headerButton} type="primary">login</Button>
             </Col>
             <Col span={3} order={3}>
-              <Button className='header-button'>sign up</Button>
+              <Button className={styles.headerButton}>sign up</Button>
             </Col>
           </Row>
         </Header>
-        <Content className='content-background'>
-          <div className='content'>
-            <p className='content-title'>Upcoming Events</p>
+        <Content className={styles.contentBackground}>
+          <div className={styles.content}>
+            <p className={styles.contentTitle}>Upcoming Events</p>
             <EventList></EventList>
-            <p className='content-title'>Popular groups</p>
-            <p className='content-title'>Get Started</p>
-            cover version
+            <p className={styles.contentTitle}>Popular groups</p>
+            <p className={styles.contentTitle}>Get Started</p>
           </div>
         </Content>
-        <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
+        <Footer className={styles.footer}>Culture Mingle ©2023 Created in Waterloo</Footer>
       </Layout>
     </Layout>
 

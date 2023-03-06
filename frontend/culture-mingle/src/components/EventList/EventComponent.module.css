@@ -1,29 +1,29 @@
-.event-layout {
+.eventLayout {
     padding: 20px;
     margin: 20px;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.75);
 }
-.event-desc {
+.eventDesc {
     padding-right: 10px;
 }
-.event-time {
+.eventTime {
     color: #f7629e;
     font-weight: 700;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 15px;
 }
-.event-name {
+.eventName {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 10px 0;
     /* font-weight: 700; */
     font-size: 20px;
 }
-.event-attendee {
+.eventAttendee {
     padding-top: 10px;
     color: #404040;
 }
-.event-image {
+.eventImage {
     max-width: 100%;
     max-height: 100%;
     border-radius: 10px;
