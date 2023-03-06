@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class Activity {
 
     private String description;
 
-    private List<String> attendees;
+    private List<Pair<String, Role>> attendees;
 
     public Activity() {}
 
@@ -37,10 +38,10 @@ public class Activity {
         this.time = time;
         this.location = location;
         this.description = description;
-        this.attendees = new ArrayList<String>();
+        this.attendees = new ArrayList<Pair<String, Role>>();
     }
 
-    public Activity(String title, Date time, String location, String description, List<String> attendees) {
+    public Activity(String title, Date time, String location, String description, List<Pair<String, Role>> attendees) {
         this.title = title;
         this.time = time;
         this.location = location;
