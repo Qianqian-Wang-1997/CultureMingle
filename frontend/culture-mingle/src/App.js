@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ConfigProvider } from 'antd';
+
 import Home from "./components/Home"
 import Navigation from "./components/Navigation";
 import { DatePicker} from 'antd';
@@ -9,11 +11,26 @@ const onChange = (date, dateString) => {
 };
 
 function App() {
+  
   return (
+    <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: '#50a8e8',
+      },
+    }}
+  >
     <div>
+<<<<<<< HEAD
       
+=======
+      {/* <Navigation></Navigation> */}
+      
+      <Registration></Registration>
+>>>>>>> song
     </div>
-
+</ConfigProvider>
   )
 }
+
 export default App;
