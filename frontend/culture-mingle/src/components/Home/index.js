@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
-import EventList from '../EventList/index'
+import EventList from "../EventList/index"
 import {
   DesktopOutlined,
   SearchOutlined,
@@ -10,7 +10,7 @@ import {
   BulbOutlined
 } from '@ant-design/icons';
 // import { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme, Col, Button, Row } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -41,33 +41,40 @@ const items = [
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(true);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
 
   return (
-      <Layout  style={{ minHeight: '100vh' }}>
-        <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <div style={{ height: 32, margin: 16 }}>
-            {/* <BulbOutlined style={{ color: 'black' }} /> */}
-            {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>}
+    <Layout className='layout'>
+      <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <div style={{ height: 32, margin: 16 }}>
+          {/* {!collapsed ? <div className='logo'>Culture Mingle</div> : <></>} */}
+        </div>
+        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
+      </Sider>
+      <Layout >
+        <Header theme='light' className='header'>
+          <Row>
+            <Col span={18} order={1} className='header-logo'>
+              Culture Mingle
+            </Col>
+            <Col span={3} order={2}>
+              <Button className='header-button' type="primary">login</Button>
+            </Col>
+            <Col span={3} order={3}>
+              <Button className='header-button'>sign up</Button>
+            </Col>
+          </Row>
+        </Header>
+        <Content className='content-background'>
+          <div className='content'>
+            <p className='content-title'>Upcoming Events</p>
+            <EventList></EventList>
+            <p className='content-title'>Popular groups</p>
+            <p className='content-title'>Get Started</p>
           </div>
-          <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
-        </Sider>
-        <Layout >
-          <Header theme='light' className='header'>
-            Culture Mingle
-          </Header>
-          <Content className='background'>
-            <div style={{ padding: 24, minHeight: 360}}>
-              {/* <p> some program list </p> */}
-              <EventList></EventList>
-            </div>
-          </Content>
-          {/* <Footer style={{ textAlign: 'center' }}>Culture Mingle ©2023 Created in Waterloo</Footer> */}
-        </Layout>
+        </Content>
+        <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
       </Layout>
+    </Layout>
 
   );
 };
