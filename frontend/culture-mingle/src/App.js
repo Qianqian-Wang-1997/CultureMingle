@@ -21,7 +21,7 @@ function App() {
     }}
   >
     <div>
-      <Home></Home>
+      <Login></Login>
     </div>
 </ConfigProvider>
   )

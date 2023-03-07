@@ -1,3 +1,4 @@
+/* https://juejin.cn/post/6950873363275317255#heading-4 */
 .logo {
     text-align: center;
     font-size: 35px;
@@ -21,7 +22,7 @@
     margin: 5px;
     /* border-color: black; */
   }
-  .headerstyle{
+  .headerStyle{
       text-align:'center';
       color : '#fff';
       height: 64px;
@@ -29,29 +30,39 @@
       line-height: 64px;
       background-color: black;
   }
-  .contentstyle{
-    min-height: 500px;
+  .contentStyle{
+    min-height: 560px;
     line-height: 120px;
-    background-color: black;
+    background-color: #fff;
     text-align: center;
   }
-  .siderstyle{
+  .siderStyle{
     text-align: center;
-    background-color: pink;
+    background-color: pink !important;
     color: #fff;
-    /* 行间距 */
     line-height: 120px;
+    min-height: 560px;
   }
-  .footerstyle{
+  .footerStyle{
+    height: 64px;
     text-align: center;
     color: #fff;
-    background-color: black;
+    background-color: black !important;
+
   }
-  .button{
+  .buttonStyle{
     background-color: pink;
+    width: 160px;
+    height: 40px;
+    margin: 10px;
   }
   .hint{
     text-align: center;
     font-family:Fantasy;
     font-size: 15px;
+  }
+  .formStyle{
+    max-width: 600px;
+    font-family: fantasy;
+    font-size: 25px;
   }

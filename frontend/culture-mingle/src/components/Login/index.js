@@ -1,4 +1,4 @@
-import "./login.css"
+import styles from "./login.module.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
 import { EditFilled, HeartFilled, HeartOutlined } from '@ant-design/icons';
@@ -8,31 +8,7 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
-const headerStyle = {
-    textalign: 'center',
-    color: '#fff',
-    height: 64,
-    paddingInline: 50,
-    lineHeight: '64px',
-    backgroundColor: 'black',
-};
-const contentStyle = {
-    minHeight: 600,
-    lineHeight: '120px',
-    backgroundColor: '#FFFFFF',
-    testalign: 'center'
-};
-const siderStyle = {
-    textalign: 'center',
-    lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: 'pink',
-};
-const footerStyle = {
-    textalign: 'center',
-    color: '#fff',
-    backgroundColor: 'black',
-};
+
 const layout = {
     labelCol: {
         span: 8,
@@ -76,19 +52,19 @@ const Login = () => {
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
             <Layout>
-                <Header style={headerStyle}>
+                <Header className={styles.headerStyle}>
                     <Content></Content>
                 </Header>
                 <Layout>
-                    <Sider style={siderStyle} width={'10%'}></Sider>
-                    <Content style={contentStyle} >
-                        <div className="logo">
+                    <Sider className={styles.siderStyle} width={'10%'}></Sider>
+                    <Content className={styles.contentStyle} >
+                        <div className={styles.logo}>
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                             CultureMingle
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                         </div>
-                        <div className="content">
-                            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} className = "formstyle" >
+                        <div className={styles.content}>
+                            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} className={styles.formStyle} >
 
                                 {/* email */}
                                 <Form.Item name="email" label="E-mail"
@@ -113,13 +89,13 @@ const Login = () => {
                                 
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
-                                    <Button type="primary" htmlType="submit" style={{ background: "pink" }}>
+                                    <Button type="primary" htmlType="submit" className={styles.buttonStyle}>
                                         Submit
                                     </Button>
-                                    <Button htmlType="button" onClick={onReset} style={{ background: "white" }}>
+                                    <Button htmlType="button" onClick={onReset} style={{ background: "white"}} className={styles.buttonStyle}>
                                         Reset
                                     </Button>
-                                    <div className="hint">
+                                    <div className={styles.hint}>
                                         Not a member yet?
                                         <br/>
                                         <a href="">Sign up here!</a>
@@ -130,9 +106,9 @@ const Login = () => {
                             </Form>
                         </div>
                     </Content>
-                    <Sider style={siderStyle} width={'10%'}></Sider>
+                    <Sider className={styles.siderStyle} width={'10%'}></Sider>
                 </Layout>
-                <Footer style={footerStyle}></Footer>
+                <Footer className={styles.footerStyle}></Footer>
             </Layout>
         </Space>
     )
