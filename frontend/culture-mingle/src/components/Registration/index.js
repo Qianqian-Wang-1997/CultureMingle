@@ -1,4 +1,4 @@
-import "./registration.css"
+import styles from "./registration.module.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
 import { EditFilled, HeartFilled, HeartOutlined } from '@ant-design/icons';
@@ -8,31 +8,31 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
-const headerStyle = {
-    textalign: 'center',
-    color: '#fff',
-    height: 64,
-    paddingInline: 50,
-    lineHeight: '64px',
-    backgroundColor: 'black',
-};
-const contentStyle = {
-    minHeight: 500,
-    lineHeight: '120px',
-    backgroundColor: '#FFFFFF',
-    textalign: 'center'
-};
-const siderStyle = {
-    textalign: 'center',
-    lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: 'pink',
-};
-const footerStyle = {
-    textalign: 'center',
-    color: '#fff',
-    backgroundColor: 'black',
-};
+// const headerStyle = {
+//     textalign: 'center',
+//     color: '#fff',
+//     height: 64,
+//     paddingInline: 50,
+//     lineHeight: '64px',
+//     backgroundColor: 'black',
+// };
+// const contentStyle = {
+//     minHeight: 500,
+//     lineHeight: '120px',
+//     backgroundColor: '#FFFFFF',
+//     textalign: 'center'
+// };
+// const siderStyle = {
+//     textalign: 'center',
+//     lineHeight: '120px',
+//     color: '#fff',
+//     backgroundColor: 'pink',
+// };
+// const footerStyle = {
+//     textalign: 'center',
+//     color: '#fff',
+//     backgroundColor: 'black',
+// };
 const layout = {
     labelCol: {
         span: 8,
@@ -102,18 +102,18 @@ const Registration = () => {
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
             <Layout>
-                <Header style={headerStyle}>
+                <Header className={styles.headerStyle}>
                     <Content></Content>
                 </Header>
                 <Layout>
-                    <Sider style={siderStyle} width={'10%'}></Sider>
-                    <Content style={contentStyle} >
-                        <div className="logo">
+                    <Sider className={styles.siderStyle} width={'10%'}></Sider>
+                    <Content className={styles.contentStyle} >
+                        <div className={styles.logo}>
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                             CultureMingle
                             <HeartFilled style={{ fontSize: '30px', color: 'pink' }} />
                         </div>
-                        <div className="content">
+                        <div className={styles.content}>
                             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} style={{ maxWidth: 600, fontFamily: 'fantasy', fontSize: '25px' }} size="large">
                                 {/* name */}
                                 <Form.Item name="name" label="Name"
@@ -212,7 +212,7 @@ const Registration = () => {
                                     <Button htmlType="button" onClick={onReset} style={{ background: "white" }}>
                                         Reset
                                     </Button>
-                                    <div className="hint">
+                                    <div className={styles.hint}>
                                         Already have an account?
                                         <br/>
                                         <a href="https://www.baidu.com">Log in here.</a>
@@ -223,9 +223,9 @@ const Registration = () => {
                             </Form>
                         </div>
                     </Content>
-                    <Sider style={siderStyle} width={'10%'}></Sider>
+                    <Sider className={styles.siderStyle} width={'10%'}></Sider>
                 </Layout>
-                <Footer style={footerStyle}></Footer>
+                <Footer className={styles.footerStyle}></Footer>
             </Layout>
         </Space>
     )

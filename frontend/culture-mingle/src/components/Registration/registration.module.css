@@ -1,0 +1,60 @@
+.logo {
+    text-align: center;
+    font-size: 35px;
+    font-family:Fantasy;
+    font-weight: 300;
+    height: 10%;
+  }
+  .content{
+    margin: auto;
+    width: 75%;
+    padding: 50px;
+    height: 90%;
+  }
+  label{
+    font-family:Fantasy;
+    font-weight: 100;
+  }
+  .ant-btn {
+    width: 180px;
+    height: 48px;
+    margin: 5px;
+    /* border-color: black; */
+  }
+  .headerStyle{
+      text-align:'center';
+      color : '#fff';
+      height: 64px;
+      padding-inline: 50px;
+      line-height: 64px;
+      background-color: black ! important;
+  }
+  .siderStyle{
+    text-align: center;
+    background-color: pink ! important;
+    color: pink ;
+    line-height: 120px;
+  }
+  .contentStyle{
+    min-height: 500px;
+    line-height: 120px;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .footerStyle{
+    text-align: center;
+    color: #fff;
+    background-color: black ! important;
+  }
+
+  .hint{
+    text-align: center;
+    font-family:Fantasy;
+    font-size: 15px;
+  }
+  .formstyle{
+    max-width: 600px;
+    font-family: fantasy;
+    font-size: 25px;
+  }
