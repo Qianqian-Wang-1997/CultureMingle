@@ -28,7 +28,7 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
+dependencies {np
 	// okta's helpful spring boot starter
 	compile('com.okta.spring:okta-spring-boot-starter:0.6.0')
 	// spring boot security
