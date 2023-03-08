@@ -42,7 +42,7 @@ const EventDetail = () => {
     };
 
     // Cancel Button
-    const handleCancel =() => {
+    const handleCancel =() => { // Post Request!
         setJoined(false);
     }
 
@@ -62,6 +62,7 @@ const EventDetail = () => {
         {avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member"},
         {avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member"}
     ];
+    
     const attendeesList = attendees.map(
         (attendee) => (
             <Col className="gutter-row" span={'30%'}>

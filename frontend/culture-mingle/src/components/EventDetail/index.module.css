@@ -63,25 +63,23 @@
 }
 
 .headerStyle{
-    height: 180;
-    padding-inline: 5;
-    line-height: '64px';
-    background-color: '#DB7093'!important;
+    min-height: 180px;
+    line-height: 64px;
+    background-color: #DB7093!important;
   }
 
 .contentStyle{
-    min-height: 120;
-    line-height: '120px';
-    background-color: 'white';
+    min-height: 120px;
+    line-height: 120px;
+    padding-inline-start: 3%;
+    background-color: white!important;
 }
-
 
 .siderStyle{
-    line-height: '120px';
-    background-color: 'white';
+    line-height: 120px;
+    background-color: white!important;
 }
 
-
 .footerStyle{
-    background-color: '#DB7093';
+    background-color: #DB7093!important;
 }
