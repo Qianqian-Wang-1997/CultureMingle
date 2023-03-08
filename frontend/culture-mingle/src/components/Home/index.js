@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import EventList from "../EventList/index"
+import { NavLink } from 'react-router-dom';
+
 import {
   DesktopOutlined,
   SearchOutlined,
@@ -42,7 +44,7 @@ const items = [
 const Home = () => {
   const [collapsed, setCollapsed] = useState(true);
 
-  return ( 
+  return (
     <Layout className={styles.homeLayout}>
       <Sider theme='light' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div style={{ height: 32, margin: 16 }}>
@@ -57,7 +59,9 @@ const Home = () => {
               Culture Mingle
             </Col>
             <Col span={3} order={2}>
-              <Button className={styles.headerButton} type="primary">login</Button>
+              <NavLink to='/login'>
+                <Button className={styles.headerButton} type="primary">login</Button>
+              </NavLink>
             </Col>
             <Col span={3} order={3}>
               <Button className={styles.headerButton}>sign up</Button>
