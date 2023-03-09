@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.homeLayout {
+  font-family: Fantasy;
+  min-height: 100vh;
+}
+
+.footer {
+  background-color: white !important;
+  text-align: center;
+}
