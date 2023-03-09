@@ -79,7 +79,7 @@ const EventDetail = () => {
             <Layout>
                 <div className={styles.headerStyle}>
                     <div className={styles.time}>
-                        Friday, January 23, 2022 at 5:00 PM
+                        Friday, January 23, 2023 at 5:00 PM
                         {/* {details.time} */}
                     </div>
                     <div className={styles.title}>
