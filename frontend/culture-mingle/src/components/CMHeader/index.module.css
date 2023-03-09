@@ -1,0 +1,22 @@
+
+.header {
+    text-align: center;
+    background-color: white !important;
+}
+
+.headerLogo {
+    font-family: fantasy;
+    font-size: large;
+}
+
+.headerButton {
+    font-family: fantasy;
+}
+
+.active {
+    color: red;
+}
+
+.none {
+    color:blueviolet;
+}
