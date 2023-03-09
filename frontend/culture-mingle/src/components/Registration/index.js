@@ -6,6 +6,8 @@ import { Button, Form, Input, Select, DatePicker } from 'antd';
 import { useState } from 'react';
 import moment from 'moment';
 import dayjs from 'dayjs';
+import { NavLink } from 'react-router-dom';
+
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -191,7 +193,7 @@ const Registration = () => {
                                     <div className={styles.hint}>
                                         Already have an account?
                                         <br/>
-                                        <a href="https://www.baidu.com">Log in here.</a>
+                                        <NavLink to="/login">Log in here!</NavLink>
                                     </div>
                                     
                                 </Form.Item>
