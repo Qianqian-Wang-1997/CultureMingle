@@ -10,9 +10,10 @@
     width: 75%;
     padding: 50px;
     height: 90%;
+    
   }
   label{
-    font-family:Fantasy;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-weight: 100;
   }
   .ant-btn {
@@ -38,8 +39,8 @@
   .contentStyle{
     min-height: 500px;
     line-height: 120px;
-    background-color: #fff;
-    text-align: center;
+    background-color: #feeff5;
+    /* text-align: center; */
   }
   
   .footerStyle{
@@ -50,11 +51,20 @@
 
   .hint{
     text-align: center;
-    font-family:Fantasy;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-size: 15px;
   }
   .formstyle{
     max-width: 600px;
-    font-family: fantasy;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-size: 25px;
+  }
+  .spaceStyle{
+    width: 100%;
+  }
+  .buttonStyle {
+    /* background-color: pink; */
+    width: 160px;
+    height: 40px;
+    margin: 10px;
   }

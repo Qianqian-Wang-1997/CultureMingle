@@ -12,7 +12,7 @@
 }
 
 label {
-  font-family: Fantasy;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   font-weight: 100;
 }
 
@@ -32,12 +32,12 @@ label {
 
 .hint {
   text-align: center;
-  font-family: Fantasy;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   font-size: 15px;
 }
 
 .formStyle {
   max-width: 600px;
-  font-family: fantasy;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   font-size: 25px;
 }
