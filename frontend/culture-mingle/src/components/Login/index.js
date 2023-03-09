@@ -54,7 +54,7 @@ const Login = () => {
 
     return (
         <Space direction="vertical" size={[0, 48]} className={styles.content}>
-            <Content>
+            <Content style={{display: 'flex',  justifyContent:'center'}}>
                 <Form {...layout} form={form} name="control-hooks"
                     onFinish={onFinish}
                     className={styles.formStyle} >
