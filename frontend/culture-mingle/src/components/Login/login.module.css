@@ -1,68 +1,43 @@
 /* https://juejin.cn/post/6950873363275317255#heading-4 */
-.logo {
-    text-align: center;
-    font-size: 35px;
-    font-family:Fantasy;
-    font-weight: 300;
-    height: 10%;
-  }
-  .content{
-    margin: auto;
-    width: 75%;
-    padding: 50px;
-    height: 90%;
-  }
-  label{
-    font-family:Fantasy;
-    font-weight: 100;
-  }
-  .ant-btn {
-    width: 180px;
-    height: 48px;
-    margin: 5px;
-    /* border-color: black; */
-  }
-  .headerStyle{
-      text-align:'center';
-      color : '#fff';
-      height: 64px;
-      padding-inline: 50px;
-      line-height: 64px;
-      background-color: black;
-  }
-  .contentStyle{
-    min-height: 560px;
-    line-height: 120px;
-    background-color: #fff;
-    text-align: center;
-  }
-  .siderStyle{
-    text-align: center;
-    background-color: pink !important;
-    color: #fff;
-    line-height: 120px;
-    min-height: 560px;
-  }
-  .footerStyle{
-    height: 64px;
-    text-align: center;
-    color: #fff;
-    background-color: black !important;
 
-  }
-  .buttonStyle{
-    background-color: pink;
-    width: 160px;
-    height: 40px;
-    margin: 10px;
-  }
-  .hint{
-    text-align: center;
-    font-family:Fantasy;
-    font-size: 15px;
-  }
-  .formStyle{
-    max-width: 600px;
-    font-family: fantasy;
-    font-size: 25px;
-  }
+.content {
+  margin: auto;
+  width: 100%;
+  /* padding: 50px; */
+  height: 100%;
+  line-height: 120px;
+  background-color: #feeff5;
+  text-align: center;
+  justify-content: center;
+}
+
+label {
+  font-family: Fantasy;
+  font-weight: 100;
+}
+
+.ant-btn {
+  width: 180px;
+  height: 48px;
+  margin: 5px;
+  /* border-color: black; */
+}
+
+.buttonStyle {
+  /* background-color: pink; */
+  width: 160px;
+  height: 40px;
+  margin: 10px;
+}
+
+.hint {
+  text-align: center;
+  font-family: Fantasy;
+  font-size: 15px;
+}
+
+.formStyle {
+  max-width: 600px;
+  font-family: fantasy;
+  font-size: 25px;
+}
