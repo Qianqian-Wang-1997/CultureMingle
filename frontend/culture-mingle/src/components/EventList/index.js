@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function EventList() {
     return (
         <div>
-            <NavLink to="/events/:eventId">
+            <NavLink to="/events/:eventId" style={{color: 'black'}}>
                 <EventComponent></EventComponent>
             </NavLink>
             <EventComponent></EventComponent>

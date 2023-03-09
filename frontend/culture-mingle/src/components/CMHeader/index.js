@@ -11,7 +11,7 @@ const CMHeader = () => {
     <Header theme='light' className={styles.header}>
       <Row>
         <Col span={18} order={1} className={styles.headerLogo}>
-          <NavLink to='/' >
+          <NavLink to='/' style={{color:'black'}}>
             Culture Mingle
           </NavLink>
         </Col>
