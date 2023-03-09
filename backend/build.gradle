@@ -20,7 +20,7 @@ apply plugin: 'org.springframework.boot'
 // for spring dependencies)
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.okta.springbootwithauth'
+// group = 'com.okta.springbootwithauth'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -28,11 +28,11 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {np
+dependencies {
 	// okta's helpful spring boot starter
-	compile('com.okta.spring:okta-spring-boot-starter:0.6.0')
+	// compile('com.okta.spring:okta-spring-boot-starter:0.6.0')
 	// spring boot security
-	compile('org.springframework.boot:spring-boot-starter-security')
+	// compile('org.springframework.boot:spring-boot-starter-security')
 	// spring boot web server
 	compile('org.springframework.boot:spring-boot-starter-web')
 	// thymeleaf templating support for spring boot
@@ -40,7 +40,7 @@ dependencies {np
 	// integrates spring boot auth and thymeleaf templating
 	compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
 	// required for the @@EnableOAuth2Sso annotation
-	compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.5.RELEASE')
+	// compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.5.RELEASE')
 	compile ('org.springframework.boot:spring-boot-starter-data-rest')
 	compile ('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile ('org.projectlombok:lombok')
