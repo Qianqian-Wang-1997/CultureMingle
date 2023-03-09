@@ -5,7 +5,7 @@ import { normalizeDate } from '../../store/events'
 
 
 function EventComponent() {
-    const newDate = new Date("2023-03-12T13:00")
+    const newDate = new Date("2022-01-23T13:00")
 
     return (
         <div className={styles.eventLayout}>
@@ -14,10 +14,10 @@ function EventComponent() {
                     <div className={styles.eventTime}>
                         {normalizeDate(newDate)}
                     </div>
-                    <div className={styles.eventName}>NVU Wealth Strategy Session NYC w/Special Guest CVO Mr. David Imonitie</div>
-                    <div className={styles.eventGroup}>New York Motivation & Success Meetup Group</div>
-                    <div className={styles.eventLocation}>New York, NY</div>
-                    <div className={styles.eventAttendee}>17 attendees</div>
+                    <div className={styles.eventName}>Join the celebration of Spring Festival !</div>
+                    <div className={styles.eventGroup}>UWaterloo Chinese Students Group</div>
+                    <div className={styles.eventLocation}>Student Life Centre, 200 University Ave W, Waterloo, ON N2L 3G1</div>
+                    <div className={styles.eventAttendee}>5 attendees</div>
                 </Col>
                 <Col span={6} order={2}>
                     <img className={styles.eventImage} src="https://secure-content.meetupstatic.com/images/classic-events/509689972/222x125.jpg" alt=" " loading="lazy" />

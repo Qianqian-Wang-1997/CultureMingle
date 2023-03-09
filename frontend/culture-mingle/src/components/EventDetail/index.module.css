@@ -28,8 +28,6 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-
-
 .description {
     margin-left: 8%;
     font-size: 20px;
@@ -65,7 +63,6 @@
 .siderStyle {
     line-height: 120px;
     background-color: white !important;
-    width: 30%;
 }
 
 .footerStyle {
