@@ -106,7 +106,7 @@ const EventDetail = () => {
                         </div>
                     </Content>
 
-                    <Sider className={styles.siderStyle}>
+                    <Sider className={styles.siderStyle} width='30%'>
                         <Card title="Location" extra={<a href="https://www.google.com/maps">Open in Google Map</a>} className={styles.card}>
                             Student Life Centre, 200 University Ave W, Waterloo, ON N2L 3G1
                             {/* {details.location} */}
