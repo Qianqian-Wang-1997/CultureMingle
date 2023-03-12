@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ConfigProvider } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import axios from 'axios';
 
 import { Layout} from 'antd';
 import styles from "./index"
@@ -29,16 +30,12 @@ function App() {
             <CMSider></CMSider>
             <Layout>
               <CMHeader ></CMHeader>
-              {/* <Content className={styles.contentBackground}>
-                <div className={styles.content}> */}
                   <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/login" element={<Login />} />
-                    <Route exact path="/events/:eventId" element={<EventDetail />} />
+                    <Route exact path='/events/:eventId' element={<EventDetail />} />
                     <Route exact path="/signup" element={<Registration />} />
                   </Routes>
-                {/* </div>
-              </Content> */}
               <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
             </Layout>
           </Layout>
