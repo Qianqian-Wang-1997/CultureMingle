@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import EventComponent from './EventComponent';
-import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 function EventList() {
+    const [data, setData] = useState([]);
+    const getData = async () => {
+      const { data } = await axios.get("/events");
+      setData(data);
+    };
+    useEffect(() => {
+      getData();
+    }, []);
+
     return (
         <div>
-            <NavLink to="/events/:eventId" style={{color: 'black'}}>
-                <EventComponent></EventComponent>
-            </NavLink>
-            <EventComponent></EventComponent>
+            {data && data.map(item => (
+                <EventComponent key={item.id} event={item} />
+            ))}
         </div>
     )
 }
