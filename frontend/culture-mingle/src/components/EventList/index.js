@@ -1,36 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import EventComponent from './EventComponent';
-import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 function EventList() {
-    const [data, setData] = useState({ hits: [] });
+    const [data, setData] = useState([]);
+    const getData = async () => {
+      const { data } = await axios.get("/events");
+      setData(data);
+    };
     useEffect(() => {
-        fetch('http://localhost:8080/events', {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        })
-            .then(resp => {
-                console.log(resp);
-                console.log('======success=======');
-            })
-            .catch(err => {
-                console.log('======failure=======');
-                console.log(err);
-            });
-    })
+      getData();
+    }, []);
 
     return (
         <div>
-            {/* {data.hits.map(item => (
-                console.log(item.title)
-                ))} */}
-            <NavLink to="/events/:eventId" style={{ color: 'black' }}>
-                <EventComponent></EventComponent>
-            </NavLink>
-            <EventComponent></EventComponent>
+            {data && data.map(item => (
+                <EventComponent key={item.id} event={item} />
+            ))}
         </div>
     )
 }

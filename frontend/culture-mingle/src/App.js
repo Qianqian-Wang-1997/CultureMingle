@@ -3,7 +3,7 @@ import { ConfigProvider } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import axios from 'axios';
 
-import { Layout} from 'antd';
+import { Layout } from 'antd';
 import styles from "./index"
 
 import CMHeader from "./components/CMHeader";
@@ -26,16 +26,16 @@ function App() {
     >
       <div>
         <Router>
-          <Layout className='homeLayout'>
-            <CMSider></CMSider>
+          <Layout>
+            <CMSider />
             <Layout>
-              <CMHeader ></CMHeader>
-                  <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/login" element={<Login />} />
-                    <Route exact path='/events/:eventId' element={<EventDetail />} />
-                    <Route exact path="/signup" element={<Registration />} />
-                  </Routes>
+              <CMHeader />
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path='/events/:eventId' element={<EventDetail />} />
+                <Route exact path="/signup" element={<Registration />} />
+              </Routes>
               <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
             </Layout>
           </Layout>

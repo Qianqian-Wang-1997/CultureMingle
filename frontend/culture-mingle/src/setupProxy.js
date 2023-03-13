@@ -4,7 +4,6 @@ const proxy = {
     changeOrigin: true
 }
 module.exports = function(app) {
-console.log("test")
   app.use(
     '/events',
     createProxyMiddleware(proxy)
