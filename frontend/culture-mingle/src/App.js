@@ -13,7 +13,7 @@ import Login from "./components/Login";
 import Registration from "./components/Registration"
 import EventDetail from "./components/EventDetail"
 
-const { Footer } = Layout;
+const { Content, Footer } = Layout;
 
 function App() {
   return (
@@ -30,17 +30,18 @@ function App() {
             <CMSider />
             <Layout>
               <CMHeader />
-              <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path='/events/:eventId' element={<EventDetail />} />
-                <Route exact path="/signup" element={<Registration />} />
-              </Routes>
+              <Content className="homeLayout">
+                <Routes>
+                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/login" element={<Login />} />
+                  <Route exact path='/events/:eventId' element={<EventDetail />} />
+                  <Route exact path="/signup" element={<Registration />} />
+                </Routes>
+              </Content>
               <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
             </Layout>
           </Layout>
         </Router>
-
       </div>
     </ConfigProvider>
   )
