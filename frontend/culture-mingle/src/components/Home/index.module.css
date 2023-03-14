@@ -1,9 +1,7 @@
-
 .contentBackground {
     position: relative;
-    height: 80vh;
-    width: 100%;
-    display: flex;
+    min-width: 100%;
+    background-attachment: fixed;
     align-items: center;
     justify-content: center;
     background-image: url(/public/homepage.jpg);
@@ -28,9 +26,8 @@
 }
 
 .contentTitle {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 700;
     font-size: 35px;
     color: black;
-
 }

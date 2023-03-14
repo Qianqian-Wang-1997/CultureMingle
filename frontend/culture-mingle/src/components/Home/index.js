@@ -14,7 +14,7 @@ const Home = () => {
     <Content className={styles.contentBackground}>
       <div className={styles.content}>
         <p className={styles.contentTitle}>Upcoming Events</p>
-        <EventList></EventList>
+        <EventList />
         <p className={styles.contentTitle}>Popular groups</p>
         <p className={styles.contentTitle}>Get Started</p>
       </div>
