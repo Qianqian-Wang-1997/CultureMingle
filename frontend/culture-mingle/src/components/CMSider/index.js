@@ -24,7 +24,7 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
   getItem('My Events', '2', <SmileOutlined />),
-  getItem('Create an Event', '3', <DesktopOutlined />),
+  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <DesktopOutlined />),
   getItem('My Groups', '4', <UsergroupAddOutlined />),
   getItem('Settings', '5', <SettingOutlined />),
   getItem('Help and Support', '6', <DesktopOutlined />),
