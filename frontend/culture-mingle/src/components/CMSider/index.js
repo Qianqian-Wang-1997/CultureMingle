@@ -20,10 +20,13 @@ function getItem(label, key, icon, children) {
     label
   };
 }
-
+const userId = "382472338"
 const items = [
   getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
-  getItem('My Events', '2', <SmileOutlined />),
+  getItem(<NavLink to={`/members/${userId}`} >My Profile</NavLink>, '2', <SmileOutlined />, [
+    getItem('My groups', '7'),
+    getItem('My events', '8')
+  ]),
   getItem('Create an Event', '3', <DesktopOutlined />),
   getItem('My Groups', '4', <UsergroupAddOutlined />),
   getItem('Settings', '5', <SettingOutlined />),

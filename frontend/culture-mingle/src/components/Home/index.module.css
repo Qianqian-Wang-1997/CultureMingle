@@ -1,5 +1,6 @@
 .contentBackground {
     position: relative;
+    padding: 10px 10px;
     min-width: 100%;
     background-attachment: fixed;
     align-items: center;
