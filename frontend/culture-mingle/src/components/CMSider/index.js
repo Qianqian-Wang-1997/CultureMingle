@@ -25,11 +25,11 @@ const items = [
   getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
   getItem(<NavLink to={`/members/${userId}`} >My Profile</NavLink>, '2', <SmileOutlined />, [
     getItem('My groups', '7'),
-    getItem('My events', '8')
+    getItem('My events', '8'),
+    // getItem('')
   ]),
-  getItem('Create an Event', '3', <DesktopOutlined />),
-  getItem('My Groups', '4', <UsergroupAddOutlined />),
   getItem('Settings', '5', <SettingOutlined />),
+  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <DesktopOutlined />),
   getItem('Help and Support', '6', <DesktopOutlined />),
   // getItem('Notification', '7', <BellOutlined />),
   // getItem('User', 'sub1', <SmileOutlined />, [
