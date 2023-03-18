@@ -1,13 +1,16 @@
-import styles from './index.module.css'
+import styles from './index.module.css';
 import 'antd/dist/reset.css';
 import { Layout, Space, Card, Button, Avatar, Col, Row, Modal } from 'antd';
 import { ShareAltOutlined, UsergroupAddOutlined, TwitterOutlined, FacebookOutlined, InstagramOutlined, SlackOutlined, FrownOutlined } from '@ant-design/icons';
 import { useEffect, useState, React } from 'react';
 import axios from 'axios';
+import { normalizeDate } from '../../store/events'
+import { useParams } from 'react-router-dom';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
 
-const EventDetail = () => {
+const EventDetail = (props) => {
+    const { eventId } = useParams();
     const { Meta } = Card;
 
     // Join Button
@@ -47,14 +50,29 @@ const EventDetail = () => {
     }
 
     // Get event details data from the BackEnd
-    const [details, setDetails] = useState(null);
+    const [data, setData] = useState([]);
+    const [description, setDescription] = useState([]);
+    const getData = async () => {
+        const { data } = await axios.get(`/events/${eventId}`);
+        setData(data);
+        setDescription(data.description);
+    };
     useEffect(() => {
-        axios.get('http://localhost:8080/event/id').then((response) => {
-            setDetails(response.data);
-        });
+        getData();
     }, []);
 
-    // Attendees list
+    // Set description as paragraphs
+    var paralists;
+    if(description.includes("\n")) {
+        const paras = description.split('\n');
+        paralists = paras.map(
+            (para) => (<p>{para}</p>)
+        );
+    } else {
+        paralists = <p>{description}</p>
+    }
+
+    // Set attendees list
     const attendees = [
         { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
         { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
@@ -79,12 +97,10 @@ const EventDetail = () => {
             <Layout>
                 <div className={styles.headerStyle}>
                     <div className={styles.time}>
-                        Friday, January 23, 2023 at 5:00 PM
-                        {/* {details.time} */}
+                        {normalizeDate(data.time)}
                     </div>
                     <div className={styles.title}>
-                        Join the celebration of Spring Festival !
-                        {/* {details.title} */}
+                        {data.title}
                     </div>
                 </div>
 
@@ -92,11 +108,7 @@ const EventDetail = () => {
                     <Content className={styles.contentStyle} width='70%'>
                         <div className={styles.subtitles}>Details</div>
                         <div className={styles.description}>
-                            <p>The day before the Chinese New Year usually accompanied with a dinner feast, consisting of special meats are served at the tables, as a main course for the dinner and as an offering for the New Year. This meal is comparable to Thanksgiving dinner in the U.S. and remotely similar to Christmas dinner in other countries with a high percentage of Christians.</p>
-                            <p>In northern China, it is customary to make jiaozi, or dumplings, after dinner to eat around midnight. Dumplings symbolize wealth because their shape resembles a Chinese sycee. In contrast, in the South, it is customary to make a glutinous new year cake (niangao) and send pieces of it as gifts to relatives and friends in the coming days. Niangao literally means "new year cake" with a homophonous meaning of "increasingly prosperous year in year out".</p>
-                            <p>After dinner, some families may visit local temples hours before midnight to pray for success by lighting the first incense of the year; however in modern practice, many households held parties to celebrate. Traditionally, firecrackers were lit to ward evil spirits when the household doors sealed, and are not to be reopened until dawn in a ritual called "opening the door of fortune". A tradition of staying up late on Chinese New Year's Eve is known as shousui, which is still practised as it is thought to add on to one's parents' longevity.</p>
-                            <p>Come celebrate the Spring Festival with us, regardless of your origin! Let's write spring couplets, craft rabbit lanterns, and prepare a dinner feast together in the Student Life Center. We look forward to seeing you on Friday!</p>
-                            {/* {details.description} */}
+                            {paralists}
                         </div>
                         <div className={styles.subtitles}>Attendees</div>
                         <div className={styles.anttendees}>
@@ -108,12 +120,11 @@ const EventDetail = () => {
 
                     <Sider className={styles.siderStyle} width='30%'>
                         <Card title="Location" extra={<a href="https://www.google.com/maps">Open in Google Map</a>} className={styles.card}>
-                            Student Life Centre, 200 University Ave W, Waterloo, ON N2L 3G1
-                            {/* {details.location} */}
+                            {data.location}
                         </Card>
                         <Card title="Group" className={styles.card}>
                             UWaterloo Chinese Students Group
-                            {/* {details.group} */}
+                            {/* {data.group} */}
                         </Card>
                     </Sider>
 
