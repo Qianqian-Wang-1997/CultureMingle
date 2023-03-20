@@ -202,7 +202,7 @@ const Registration = () => {
                     </Content>
                     {/* <Sider className={styles.siderStyle} width={'10%'}></Sider> */}
                 </Layout>
-                
+                {/* <Footer className={styles.footerStyle}></Footer> */}
             </Layout>
         </Space>
     )
