@@ -80,9 +80,6 @@ const Registration = () => {
     return (
         <Space direction="vertical" className={styles.spaceStyle} size={[0, 48]}>
             <Layout>
-                {/* <Header className={styles.headerStyle}>
-                    <Content></Content>
-                </Header> */}
                 <Layout>
                     {/* <Sider className={styles.siderStyle} width={'10%'}></Sider> */}
                     <Content className={styles.contentStyle} >
@@ -92,7 +89,9 @@ const Registration = () => {
                             <HeartOutlined style={{ fontSize: '30px', color: 'pink' }} /> */}
                         </div>
                         <div className={styles.content}>
-                            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} style={{ maxWidth: 600, fontFamily: 'fantasy', fontSize: '25px' }} size="large">
+                            <Form {...layout} form={form} name="control-hooks" 
+                                onFinish={onFinish} 
+                                className={styles.formStyle} size="large">
                                 {/* name */}
                                 <Form.Item name="name" label="Name"
                                     rules={[
@@ -203,7 +202,7 @@ const Registration = () => {
                     </Content>
                     {/* <Sider className={styles.siderStyle} width={'10%'}></Sider> */}
                 </Layout>
-                <Footer className={styles.footerStyle}></Footer>
+                {/* <Footer className={styles.footerStyle}></Footer> */}
             </Layout>
         </Space>
     )
