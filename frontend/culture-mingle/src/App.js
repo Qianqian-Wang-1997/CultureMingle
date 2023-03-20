@@ -13,6 +13,8 @@ import Login from "./components/Login";
 import Registration from "./components/Registration"
 import EventDetail from "./components/EventDetail"
 import CreateEvent from "./components/CreateEvent"
+import Profile from "./components/Profile"
+import Groups from "./components/GroupList"
 
 const { Content, Footer } = Layout;
 
@@ -36,8 +38,11 @@ function App() {
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path='/events/:eventId' element={<EventDetail />} />
+                  <Route exact path='/groups' element={<Groups />} />
+
                   <Route exact path="/signup" element={<Registration />} />
                   <Route exact path="/createEvent" element={<CreateEvent />} />
+                  <Route exact path="/members/:userId" element={<Profile />} />
                 </Routes>
               </Content>
               <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>

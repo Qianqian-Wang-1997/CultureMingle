@@ -20,20 +20,14 @@ function getItem(label, key, icon, children) {
     label
   };
 }
-
+const userId = "382472338"
 const items = [
   getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
-  getItem('My Events', '2', <SmileOutlined />),
-  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <DesktopOutlined />),
-  getItem('My Groups', '4', <UsergroupAddOutlined />),
+  getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
+
   getItem('Settings', '5', <SettingOutlined />),
+  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <DesktopOutlined />),
   getItem('Help and Support', '6', <DesktopOutlined />),
-  // getItem('Notification', '7', <BellOutlined />),
-  // getItem('User', 'sub1', <SmileOutlined />, [
-  //   getItem('Tom', '3'),
-  //   getItem('Bill', '4'),
-  //   getItem('Alex', '5'),
-  // ])
 ];
 const { Sider } = Layout;
 
