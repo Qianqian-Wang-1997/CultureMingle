@@ -97,7 +97,7 @@ const Login = () => {
                                         Reset
                                     </Button>
                                     <div className={styles.hint}>
-                                        <br/><br/><br/><br/><br/>
+                                        <br/><br/><br/><br/><br/><br/><br/>
                                         Not a member yet?
                                         <br />
                                         <NavLink to="/signup">Sign up here!</NavLink>
