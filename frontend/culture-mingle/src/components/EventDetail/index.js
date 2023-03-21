@@ -1,6 +1,6 @@
 import styles from './index.module.css';
 import 'antd/dist/reset.css';
-import { Layout, Space, Card, Button, Avatar, Col, Row, Modal } from 'antd';
+import { Layout, Space, Card, Button, Avatar, Col, Row, Modal, FloatButton } from 'antd';
 import { ShareAltOutlined, UsergroupAddOutlined, TwitterOutlined, FacebookOutlined, InstagramOutlined, SlackOutlined, FrownOutlined } from '@ant-design/icons';
 import { useEffect, useState, React } from 'react';
 import axios from 'axios';
@@ -161,6 +161,8 @@ const EventDetail = (props) => {
                     </Modal>
                     </div>
                 </Footer>
+
+                <FloatButton.BackTop />
 
             </Layout>
 
