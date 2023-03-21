@@ -8,7 +8,6 @@ import {
   DesktopOutlined,
   SearchOutlined,
   SmileOutlined,
-  TeamOutlined,
   SettingOutlined,
   ScheduleOutlined
 } from '@ant-design/icons';
@@ -27,7 +26,6 @@ const items = [
   getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
 
   getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <ScheduleOutlined />),
-  getItem(<NavLink to="/createGroup" >Start a Group</NavLink>, '4', <TeamOutlined />),
   getItem('Settings', '5', <SettingOutlined />),
   getItem('Help and Support', '6', <DesktopOutlined />),
 ];
