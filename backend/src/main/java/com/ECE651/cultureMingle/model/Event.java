@@ -29,7 +29,7 @@ public class Event {
 
     private String description;
 
-    private List<Pair<String, Role>> attendees;
+    private List<Pair<String, ARole>> attendees;
 
     public Event() {}
 
@@ -38,10 +38,10 @@ public class Event {
         this.time = time;
         this.location = location;
         this.description = description;
-        this.attendees = new ArrayList<Pair<String, Role>>();
+        this.attendees = new ArrayList<Pair<String, ARole>>();
     }
 
-    public Event(String title, Date time, String location, String description, List<Pair<String, Role>> attendees) {
+    public Event(String title, Date time, String location, String description, List<Pair<String, ARole>> attendees) {
         this.title = title;
         this.time = time;
         this.location = location;

@@ -43,8 +43,13 @@ dependencies {
 	// compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.5.RELEASE')
 	compile ('org.springframework.boot:spring-boot-starter-data-rest')
 	compile ('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile ('org.springframework.boot:spring-boot-starter-security')
+	compile ('org.springframework.boot:spring-boot-starter-validation')
+	compile ('io.jsonwebtoken:jjwt:0.9.1')
 	compile ('org.projectlombok:lombok')
 	compile ('javax.persistence:persistence-api:1.0.2')
+	compile ('org.slf4j:slf4j-api:1.7.30')
+	compile ('ch.qos.logback:logback-classic:1.2.3')
 	// for spring boot testing
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')

@@ -15,4 +15,8 @@ okta:
     clientId: 0oa8l2b5h7Fd3O1VC5d7
     clientSecret: acR_Jns6LRuIcQr3Sx-_BnefDCLYY8ZLiAcb6p6w
     rolesClaim: groups
-
+bezkoder:
+  app:
+    jwtCookieName: bezkoder
+    jwtSecret: bezKoderSecretKey
+    jwtExpirationMs: 86400000

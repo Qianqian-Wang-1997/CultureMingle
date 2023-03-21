@@ -1,19 +1,24 @@
 package com.ECE651.cultureMingle;
 
 import com.ECE651.cultureMingle.model.Event;
+import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.repository.EventRepository;
+import com.ECE651.cultureMingle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @SpringBootApplication
-public class CultureMingleWebApplication implements CommandLineRunner {
+public class CultureMingleWebApplication implements CommandLineRunner{
 
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public static void main(String[] args) { SpringApplication.run(CultureMingleWebApplication.class, args); }
 
@@ -36,6 +41,15 @@ public class CultureMingleWebApplication implements CommandLineRunner {
 
         for (Event event : eventRepository.findAll()) {
             System.out.println(event);
+        }
+
+        if (userRepository.findAll().isEmpty()) {
+            userRepository.save(new User("Aosen", "aosenxiong11@gmail.com",
+                    "This is test password"));
+        }
+
+        for (User user : userRepository.findAll()) {
+            System.out.println(user);
         }
     }
 }
