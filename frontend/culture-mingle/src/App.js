@@ -37,7 +37,7 @@ function App() {
               <Content className="homeLayout">
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route exact path="/login" element={<Login saveToken={setToken} name="SYT"/>} />
+                  <Route exact path="/login" element={<Login saveToken={setToken}/>} />
                   <Route exact path='/events/:eventId' element={<EventDetail />} />
                   <Route exact path='/groups' element={<Groups />} />
 

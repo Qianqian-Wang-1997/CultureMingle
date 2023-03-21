@@ -33,7 +33,6 @@ const CMHeader = (isLogined) => {
           <NavLink to='/' style={{ color: 'black' }}>
             Culture Mingle
           </NavLink>
-          <h3>token:{isLogined.token}</h3>
         </Col>
         {isLogined.token==null ?
           <>
