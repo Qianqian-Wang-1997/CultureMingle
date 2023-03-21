@@ -4,9 +4,10 @@ import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
 import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService{
         if (userDb.isPresent()) {
             User userUpdate = userDb.get();
             userUpdate.setId(user.getId());
+            userUpdate.setEmail(user.getEmail());
             userUpdate.setDescription(user.getDescription());
             userRepository.save(user);
             return userUpdate;

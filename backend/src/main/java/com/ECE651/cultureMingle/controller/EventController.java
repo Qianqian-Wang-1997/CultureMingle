@@ -5,6 +5,7 @@ import com.ECE651.cultureMingle.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
+    @PreAuthorize("hasRole('USER')")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Event> getActivityById(@PathVariable String id) {
         return ResponseEntity.ok().body(eventService.getActivityById(id));
