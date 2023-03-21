@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styles from './index.module.css';
 import { NavLink } from 'react-router-dom';
 
 import { Layout, Col, Button, Row, Dropdown } from 'antd';
 
 const { Header } = Layout;
-const isLogined = false;
+//const isLogined = true;
 const userId = "1234567"
 
 const items = [
@@ -20,7 +20,12 @@ const items = [
 ];
 
 
-const CMHeader = () => {
+const CMHeader = (isLogined) => {
+  const handleLogout=(e)=>{
+    isLogined.token = null;
+    console.log("click logout")
+  }
+
   return (
     <Header theme='light' className={styles.header}>
       <Row>
@@ -29,7 +34,7 @@ const CMHeader = () => {
             Culture Mingle
           </NavLink>
         </Col>
-        {isLogined ?
+        {isLogined.token==null ?
           <>
             <Col span={2} order={2}>
               <NavLink to='/login'>
@@ -50,7 +55,7 @@ const CMHeader = () => {
               </NavLink>
             </Col>
             <Col span={1} order={3}>
-              <NavLink to={`/`}>
+              <NavLink onClick={event=>handleLogout(event)} to={`/`} >
                 <Button className={styles.headerButton}>Log out</Button>
               </NavLink>
             </Col>
