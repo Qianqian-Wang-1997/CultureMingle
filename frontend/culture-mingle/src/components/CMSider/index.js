@@ -8,8 +8,9 @@ import {
   DesktopOutlined,
   SearchOutlined,
   SmileOutlined,
-  UsergroupAddOutlined,
-  SettingOutlined
+  TeamOutlined,
+  SettingOutlined,
+  ScheduleOutlined
 } from '@ant-design/icons';
 
 function getItem(label, key, icon, children) {
@@ -25,8 +26,9 @@ const items = [
   getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
   getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
 
+  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <ScheduleOutlined />),
+  getItem(<NavLink to="/createGroup" >Start a Group</NavLink>, '4', <TeamOutlined />),
   getItem('Settings', '5', <SettingOutlined />),
-  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <DesktopOutlined />),
   getItem('Help and Support', '6', <DesktopOutlined />),
 ];
 const { Sider } = Layout;
