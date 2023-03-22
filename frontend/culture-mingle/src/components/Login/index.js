@@ -7,7 +7,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -29,30 +29,20 @@ const tailLayout = {
     textalign: 'center',
 };
 
-const Login = (props) => {
+const Login = () => {
     const [form] = Form.useForm();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassWord] = useState("");
     const [day, setDay] = useState("");
     const [gender, setGender] = useState("");
-    const navigate = useNavigate();
     const wholeform = {
         email: email,
         password, password,
     }
-    
-    const onFinish = async(e) => {
+    const onFinish = (values) => {
         console.log(wholeform);
-        console.log(e);
-        console.log(props.name);
-        if(email=="1@1.com" && password=="123"){
-            //saveToken(email);
-            props.saveToken(email);
-            navigate('/',{replace:true});
-        }else{
-            alert('Invalid account or password!');
-        }
+        console.log(values);
     };
     const onReset = () => {
         form.resetFields();
