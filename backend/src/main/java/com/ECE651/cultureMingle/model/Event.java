@@ -1,52 +1,50 @@
 package com.ECE651.cultureMingle.model;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.util.Pair;
 
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Document
-@Setter
 @Getter
+@Setter
 public class Event {
 
     @Id
     private String id;
 
     @NotBlank
+    @NotNull
     private String title;
-
-    private Date time;
-
-    private String location;
 
     private String description;
 
-    private List<Pair<String, ARole>> attendees;
+    private Date time;
+
+    private String venue;
+
+    private String host;
+
+    private List<String> attendees = new ArrayList<>();
+
+    private String group;
+
+    private List<String> imageUrls = new ArrayList<>();
 
     public Event() {}
 
-    public Event(String title, Date time, String location, String description) {
+    public Event(String title, String description, Date time, String venue, String host) {
         this.title = title;
-        this.time = time;
-        this.location = location;
         this.description = description;
-        this.attendees = new ArrayList<Pair<String, ARole>>();
-    }
-
-    public Event(String title, Date time, String location, String description, List<Pair<String, ARole>> attendees) {
-        this.title = title;
         this.time = time;
-        this.location = location;
-        this.description = description;
-        this.attendees = attendees;
+        this.venue = venue;
+        this.host = host;
     }
 
     @Override

@@ -18,34 +18,34 @@ public class EventController {
 
     @GetMapping("/events")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<Event>> getAllActivity() {
-        return ResponseEntity.ok().body(eventService.getAllActivity());
+    public ResponseEntity<List<Event>> getAllEvent() {
+        return ResponseEntity.ok().body(eventService.getAllEvent());
     }
 
     @GetMapping("/events/{id}")
     @PreAuthorize("hasRole('USER')")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Event> getActivityById(@PathVariable String id) {
-        return ResponseEntity.ok().body(eventService.getActivityById(id));
+    public ResponseEntity<Event> getEventById(@PathVariable String id) {
+        return ResponseEntity.ok().body(eventService.getEventById(id));
     }
 
     @PostMapping("/events")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Event> createActivity(@RequestBody Event event) {
-        return ResponseEntity.ok().body(eventService.createActivity(event));
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        return ResponseEntity.ok().body(eventService.createEvent(event));
     }
 
     @PutMapping("/events/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Event> updateActivity(@PathVariable String id, @RequestBody Event event) {
+    public ResponseEntity<Event> updateEvent(@PathVariable String id, @RequestBody Event event) {
         event.setId(id);
-        return ResponseEntity.ok().body(eventService.updateActivity(event));
+        return ResponseEntity.ok().body(eventService.updateEvent(event));
     }
 
     @DeleteMapping("/events/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public HttpStatus deleteActivity(@PathVariable String id) {
-        eventService.deleteActivity(id);
+    public HttpStatus deleteEvent(@PathVariable String id) {
+        eventService.deleteEvent(id);
         return HttpStatus.OK;
     }
 }

@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface EventService {
 
-    Event createActivity(Event event);
+    Event createEvent(Event event);
 
-    Event updateActivity(Event event);
+    Event updateEvent(Event event);
 
-    List<Event> getAllActivity();
+    List<Event> getAllEvent();
 
-    Event getActivityById(String id);
+    Event getEventById(String id);
 
-    void deleteActivity(String id);
+    void deleteEvent(String id);
 }
