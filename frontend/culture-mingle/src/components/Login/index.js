@@ -7,6 +7,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
@@ -29,20 +30,44 @@ const tailLayout = {
     textalign: 'center',
 };
 
-const Login = () => {
+const Login = (props) => {
     const [form] = Form.useForm();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassWord] = useState("");
     const [day, setDay] = useState("");
     const [gender, setGender] = useState("");
+    const navigate = useNavigate();
     const wholeform = {
-        email: email,
-        password, password,
+        username: email,
+        password: password,
     }
-    const onFinish = (values) => {
+    const onFinish = async(e) => {
         console.log(wholeform);
-        console.log(values);
+        console.log(e);
+        try {
+            axios.post(
+                'http://localhost:8080/api/auth/signin',
+                wholeform,
+            ).then(
+                res=>{
+                    console.log(res);
+                    console.log(res.data);
+                    props.saveToken(email);
+                    navigate('/',{replace:true});
+                }
+            )
+        } catch (err) {
+            console.log(err);
+            alert('Invalid account or password!');
+        }
+    
+        // if(email=="1@1.com" && password=="123"){
+        //     props.saveToken(email);
+        //     navigate('/',{replace:true});
+        // }else{
+        //     alert('Invalid account or password!');
+        // }
     };
     const onReset = () => {
         form.resetFields();

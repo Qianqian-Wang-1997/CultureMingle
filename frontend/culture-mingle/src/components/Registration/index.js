@@ -51,10 +51,9 @@ const Registration = () => {
     }
     const onFinish = async(e) => {
         console.log(wholeform);
-        //console.log(e);
         try {
             axios.post(
-                'http://localhost:8080/register/',
+                'http://localhost:8080/api/auth/signup',
                 wholeform,
             ).then(
                 res=>{
