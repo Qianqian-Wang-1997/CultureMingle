@@ -18,22 +18,33 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
     @Override
-    public Event createActivity(Event event) {
+    public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
 
     @Override
-    public Event updateActivity(Event event) {
-        Optional<Event> activityDb = eventRepository.findById(event.getId());
+    public Event updateEvent(Event event) {
+        Optional<Event> eventDb = eventRepository.findById(event.getId());
 
-        if (activityDb.isPresent()) {
-            Event eventUpdate = activityDb.get();
-            eventUpdate.setId(event.getId());
-            eventUpdate.setTitle(event.getTitle());
-            eventUpdate.setTime(event.getTime());
-            eventUpdate.setLocation(event.getLocation());
-            eventUpdate.setDescription(event.getDescription());
-            eventUpdate.setAttendees(event.getAttendees());
+        if (eventDb.isPresent()) {
+            Event eventUpdate = eventDb.get();
+
+            if (event.getTitle() != null) {
+                eventUpdate.setTitle(event.getTitle());
+            }
+            if (event.getDescription() != null) {
+                eventUpdate.setDescription(event.getDescription());
+            }
+            if (event.getTime() != null) {
+                eventUpdate.setTime(event.getTime());
+            }
+            if (event.getVenue() != null) {
+                eventUpdate.setVenue(event.getVenue());
+            }
+            if (event.getHost() != null) {
+                eventUpdate.setHost(event.getHost());
+            }
+
             eventRepository.save(event);
             return eventUpdate;
         } else {
@@ -42,27 +53,27 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getAllActivity() {
+    public List<Event> getAllEvent() {
         return eventRepository.findAll();
     }
 
     @Override
-    public Event getActivityById(String id) {
-        Optional<Event> activityDb = eventRepository.findById(id);
+    public Event getEventById(String id) {
+        Optional<Event> eventDb = eventRepository.findById(id);
 
-        if (activityDb.isPresent()) {
-            return activityDb.get();
+        if (eventDb.isPresent()) {
+            return eventDb.get();
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + id);
         }
     }
 
     @Override
-    public void deleteActivity(String id) {
-        Optional<Event> activityDb = eventRepository.findById(id);
+    public void deleteEvent(String id) {
+        Optional<Event> eventDb = eventRepository.findById(id);
 
-        if (activityDb.isPresent()) {
-            eventRepository.delete(activityDb.get());
+        if (eventDb.isPresent()) {
+            eventRepository.delete(eventDb.get());
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + id);
         }
