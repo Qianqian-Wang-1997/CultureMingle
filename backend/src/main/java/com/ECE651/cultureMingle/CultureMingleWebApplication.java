@@ -13,14 +13,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootApplication
-public class CultureMingleWebApplication implements CommandLineRunner{
+public class CultureMingleWebApplication implements CommandLineRunner {
 
     @Autowired
     private EventRepository eventRepository;
     @Autowired
     private UserRepository userRepository;
 
-    public static void main(String[] args) { SpringApplication.run(CultureMingleWebApplication.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(CultureMingleWebApplication.class, args);
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -56,4 +58,5 @@ public class CultureMingleWebApplication implements CommandLineRunner{
         }
     }
 }
+
 

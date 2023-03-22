@@ -23,7 +23,6 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
-    @PreAuthorize("hasRole('USER')")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Event> getEventById(@PathVariable String id) {
         return ResponseEntity.ok().body(eventService.getEventById(id));
