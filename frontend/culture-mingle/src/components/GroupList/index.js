@@ -22,7 +22,7 @@ function GroupList({ groupList }) {
       }
     ]
     return (
-        <div style={{ backgroundColor:"#fdd8e7", minHeight: "100vh"}}>
+        <div>
             {data && data.map(item => (
                 <GroupComponent key={item.id} group={item} />
             ))}
