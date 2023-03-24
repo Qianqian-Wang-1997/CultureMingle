@@ -5,11 +5,9 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Document
 @Getter
@@ -19,8 +17,6 @@ public class Event {
     @Id
     private String id;
 
-    @NotBlank
-    @NotNull
     private String title;
 
     private String description;
@@ -31,11 +27,11 @@ public class Event {
 
     private String host;
 
-    private List<String> attendees = new ArrayList<>();
+    private Set<String> attendees = new HashSet<>();
 
     private String group;
 
-    private List<String> imageUrls = new ArrayList<>();
+    private Set<String> imageUrls = new HashSet<>();
 
     public Event() {}
 
