@@ -48,11 +48,6 @@ public class CultureMingleWebApplication implements CommandLineRunner {
             System.out.println(event);
         }
 
-        if (userRepository.findAll().isEmpty()) {
-            userRepository.save(new User("Aosen", "aosenxiong11@gmail.com",
-                    "This is test password"));
-        }
-
         for (User user : userRepository.findAll()) {
             System.out.println(user);
         }
