@@ -42,7 +42,8 @@ public class User {
         this.password = password;
     }
     private String gender;
-    private Date dateOfBirth;
+//    e.g(2022-01-01)
+    private String dateOfBirth;
     private String description;
     private String avatar;
     private String pastActivies;
