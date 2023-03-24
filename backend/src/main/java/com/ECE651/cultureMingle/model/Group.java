@@ -5,10 +5,8 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Document
 @Getter
@@ -18,20 +16,24 @@ public class Group {
     @Id
     private String id;
 
-    @NotBlank
-    @NotNull
     private String groupName;
+
+    private String description;
+
+    private String location;
 
     private String organizer;
 
-    private List<String> members = new ArrayList<>();
+    private Set<String> members = new HashSet<>();
 
-    private List<String> events = new ArrayList<>();
+    private Set<String> events = new HashSet<>();
 
     private String logoUrl;
 
-    public Group(String groupName, String organizer) {
+    public Group(String groupName, String description, String location, String organizer) {
         this.groupName = groupName;
+        this.description = description;
+        this.location = location;
         this.organizer = organizer;
     }
 
