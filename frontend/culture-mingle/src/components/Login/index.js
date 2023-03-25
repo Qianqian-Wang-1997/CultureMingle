@@ -1,17 +1,11 @@
 import styles from "./login.module.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
-import { EditFilled, HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Select, DatePicker } from 'antd';
 import { useState } from 'react';
-import moment from 'moment';
-import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
-const { Option } = Select;
 const { Header, Footer, Sider, Content } = Layout;
-
 
 const layout = {
     labelCol: {
@@ -35,11 +29,10 @@ const Login = (props) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassWord] = useState("");
-    const [day, setDay] = useState("");
-    const [gender, setGender] = useState("");
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const wholeform = {
-        username: email,
+        username: name,
         password: password,
     }
     const onFinish = async(e) => {
@@ -56,26 +49,18 @@ const Login = (props) => {
                     props.saveToken(email);
                     navigate('/',{replace:true});
                 }
-            )
+            ).catch((error)=>{
+                console.log(error.response.data.message);
+                setMessage(error.response.data.message);
+            })
         } catch (err) {
             console.log(err);
             alert('Invalid account or password!');
         }
-    
-        // if(email=="1@1.com" && password=="123"){
-        //     props.saveToken(email);
-        //     navigate('/',{replace:true});
-        // }else{
-        //     alert('Invalid account or password!');
-        // }
     };
     const onReset = () => {
         form.resetFields();
     };
-    const onGenderChange = (values) => {
-        setGender(values);
-        console.log(values);
-    }
 
     return (
         <Space direction="vertical" size={[0, 48]} className={styles.spaceStyle}>
@@ -83,9 +68,6 @@ const Login = (props) => {
                 <Layout>
                     <Content className={styles.contentStyle}>
                         <div className={styles.logo}>
-                            {/* <HeartOutlined style={{ fontSize: '30px', color: 'pink' }} />
-                            CultureMingle
-                            <HeartOutlined style={{ fontSize: '30px', color: 'pink' }} /> */}
                             <br/>
                         </div>
                         <div className={styles.content}>
@@ -93,7 +75,7 @@ const Login = (props) => {
                                 onFinish={onFinish}
                                 className={styles.formStyle} size="large">
                                 {/* email */}
-                                <Form.Item name="email" label="E-mail"
+                                {/* <Form.Item name="email" label="E-mail"
                                     rules={[
                                         { required: true, message: "Please input your email address.", },
                                         { type: 'email', message: "Please input a valid email address." }
@@ -101,8 +83,19 @@ const Login = (props) => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 >
                                     <Input size="large" />
-                                </Form.Item>
+                                </Form.Item> */}
 
+                                {/* name */}
+                                <Form.Item name="name" label="Username"
+                                    rules={[
+                                        { required: true, message: "Please input your name." },
+                                        {min: 3, message:'Username should be at least 3 characters in length.'},
+                                        {max: 20, message:'Username should be at most 20 characters in length.'}
+                                    ]}
+                                    onChange={(e) => setName(e.target.value)}
+                                >
+                                    <Input />
+                                </Form.Item>
                                 {/* Password */}
                                 <Form.Item name='password' label="Password"
                                     rules={[
@@ -115,6 +108,7 @@ const Login = (props) => {
 
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
+                                    <div className={styles.hint}>{message}</div>
                                     <Button type="primary" htmlType="submit" className={styles.buttonStyle}>
                                         Submit
                                     </Button>
@@ -122,7 +116,7 @@ const Login = (props) => {
                                         Reset
                                     </Button>
                                     <div className={styles.hint}>
-                                        <br/><br/><br/><br/><br/><br/><br/>
+                                        <br/><br/><br/><br/><br/><br/>
                                         Not a member yet?
                                         <br />
                                         <NavLink to="/signup">Sign up here!</NavLink>
