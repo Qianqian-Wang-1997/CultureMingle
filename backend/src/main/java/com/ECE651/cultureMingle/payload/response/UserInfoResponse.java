@@ -6,13 +6,15 @@ public class UserInfoResponse {
     private String id;
     private String username;
     private String email;
-    private List<String> roles;
+//    private List<String> roles;
 
-    public UserInfoResponse(String id, String username, String email, List<String> roles) {
+    private String jwt;
+
+    public UserInfoResponse(String id, String username, String email, String jwt) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.roles = roles;
+        this.jwt = jwt;
     }
 
     public String getId() {
@@ -39,7 +41,14 @@ public class UserInfoResponse {
         this.username = username;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getJWT() {
+        return jwt;
     }
+
+    public void setJWT(String jwt) {
+        this.jwt = jwt;
+    }
+//    public List<String> getRoles() {
+//        return roles;
+//    }
 }

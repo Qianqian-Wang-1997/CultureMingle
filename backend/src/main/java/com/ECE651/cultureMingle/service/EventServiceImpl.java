@@ -2,11 +2,14 @@ package com.ECE651.cultureMingle.service;
 
 import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
 import com.ECE651.cultureMingle.model.Event;
+import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.repository.EventRepository;
+import com.ECE651.cultureMingle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,8 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+//    @Autowired UserRepository userRepository;
 
     @Override
     public Event createEvent(Event event) {
@@ -65,6 +70,17 @@ public class EventServiceImpl implements EventService {
             return eventDb.get();
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + id);
+        }
+    }
+
+    @Override
+    public void joinEvent(String id, User user) {
+        Optional<Event> eventDb = eventRepository.findById(id);
+
+        if (eventDb.isPresent()) {
+            Event eventUpdate = eventDb.get();
+            eventUpdate.setAttendees(eventUpdate.getAttendees());
+
         }
     }
 
