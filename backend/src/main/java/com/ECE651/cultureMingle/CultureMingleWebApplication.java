@@ -15,12 +15,9 @@ import java.util.Date;
 @SpringBootApplication
 public class CultureMingleWebApplication{
 
-
     public static void main(String[] args) {
         SpringApplication.run(CultureMingleWebApplication.class, args);
     }
-
-
 
 }
 
