@@ -113,17 +113,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void joinEvent(String id, User user) {
-        Optional<Event> eventDb = eventRepository.findById(id);
-
-        if (eventDb.isPresent()) {
-            Event eventUpdate = eventDb.get();
-            eventUpdate.setAttendees(eventUpdate.getAttendees());
-
-        }
-    }
-
-    @Override
     public void deleteEvent(String id) {
 
         Optional<Event> eventDb = eventRepository.findById(id);
