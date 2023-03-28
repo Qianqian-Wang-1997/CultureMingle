@@ -2,6 +2,7 @@ package com.ECE651.cultureMingle.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -21,30 +22,22 @@ public class Event {
 
     private String description;
 
-    private Date time;
-
     private String venue;
 
     private String host;
 
-    private Set<String> attendees = new HashSet<>();
-
-    private String group;
+    private Date time;
 
     private Set<String> imageUrls = new HashSet<>();
 
-    public Event() {}
+    @DBRef
+    private Group group;
 
-    public Event(String title, String description, Date time, String venue, String host) {
-        this.title = title;
-        this.description = description;
-        this.time = time;
-        this.venue = venue;
-        this.host = host;
-    }
+    @DBRef
+    private Set<User> attendees = new HashSet<>();
+
+    public Event() { }
 
     @Override
-    public String toString() {
-        return String.format("\nEvent\nid: %s\ntitle: %s\n", id, title);
-    }
+    public String toString() { return "Event (id=" + id + ", title=" + title + ")"; }
 }

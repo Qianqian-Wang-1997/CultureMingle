@@ -2,6 +2,7 @@ package com.ECE651.cultureMingle.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -24,21 +25,16 @@ public class Group {
 
     private String organizer;
 
-    private Set<String> members = new HashSet<>();
-
-    private Set<String> events = new HashSet<>();
-
     private String logoUrl;
 
-    public Group(String groupName, String description, String location, String organizer) {
-        this.groupName = groupName;
-        this.description = description;
-        this.location = location;
-        this.organizer = organizer;
-    }
+    @DBRef
+    private Set<User> members = new HashSet<>();
+
+    @DBRef
+    private Set<Event> events = new HashSet<>();
+
+    public Group() { }
 
     @Override
-    public String toString() {
-        return String.format("\nGroup\nid: %s\nname: %s\n", id, groupName);
-    }
+    public String toString() { return "Group (id=" + id + ", name=" + groupName + ")"; }
 }
