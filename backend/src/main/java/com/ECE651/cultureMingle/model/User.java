@@ -41,8 +41,17 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(String username, String email, String password, String gender, String dateOfBirth) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
     private String gender;
-    private Date dateOfBirth;
+//    e.g(2022-01-01)
+    private String dateOfBirth;
     private String description;
     private String avatar;
     private String pastActivies;

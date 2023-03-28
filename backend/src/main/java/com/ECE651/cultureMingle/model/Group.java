@@ -2,13 +2,12 @@ package com.ECE651.cultureMingle.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Document
 @Getter
@@ -18,25 +17,24 @@ public class Group {
     @Id
     private String id;
 
-    @NotBlank
-    @NotNull
     private String groupName;
+
+    private String description;
+
+    private String location;
 
     private String organizer;
 
-    private List<String> members = new ArrayList<>();
-
-    private List<String> events = new ArrayList<>();
-
     private String logoUrl;
 
-    public Group(String groupName, String organizer) {
-        this.groupName = groupName;
-        this.organizer = organizer;
-    }
+    @DBRef
+    private Set<User> members = new HashSet<>();
+
+    @DBRef
+    private Set<Event> events = new HashSet<>();
+
+    public Group() { }
 
     @Override
-    public String toString() {
-        return String.format("\nGroup\nid: %s\nname: %s\n", id, groupName);
-    }
+    public String toString() { return "Group (id=" + id + ", name=" + groupName + ")"; }
 }
