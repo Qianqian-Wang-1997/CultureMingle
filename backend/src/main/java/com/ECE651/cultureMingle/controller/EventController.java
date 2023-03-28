@@ -1,7 +1,9 @@
 package com.ECE651.cultureMingle.controller;
 
 import com.ECE651.cultureMingle.model.Event;
+import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.service.EventService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,7 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/events")
-    public ResponseEntity<List<Event>> getAllEvent() {
-        return ResponseEntity.ok().body(eventService.getAllEvent());
-    }
+    public ResponseEntity<List<Event>> getAllEvent() { return ResponseEntity.ok().body(eventService.getAllEvent()); }
 
     @GetMapping("/events/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable String id) {
@@ -35,6 +35,11 @@ public class EventController {
     public ResponseEntity<Event> updateEvent(@PathVariable String id, @RequestBody Event event) {
         event.setId(id);
         return ResponseEntity.ok().body(eventService.updateEvent(event));
+    }
+
+    @PutMapping("/events/join/{id}")
+    public ResponseEntity<Event> joinEvent(@PathVariable String id, @RequestBody User user) {
+        return ResponseEntity.ok().body(eventService.joinEvent(id, user));
     }
 
     @DeleteMapping("/events/{id}")

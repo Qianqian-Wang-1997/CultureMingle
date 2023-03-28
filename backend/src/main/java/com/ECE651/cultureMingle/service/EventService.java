@@ -11,6 +11,8 @@ public interface EventService {
 
     Event updateEvent(Event event);
 
+    Event joinEvent(String id, User user);
+
     List<Event> getAllEvent();
 
     Event getEventById(String id);

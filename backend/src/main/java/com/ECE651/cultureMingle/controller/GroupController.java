@@ -1,7 +1,9 @@
 package com.ECE651.cultureMingle.controller;
 
 import com.ECE651.cultureMingle.model.Group;
+import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.service.GroupService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,7 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping("/groups")
-    public ResponseEntity<List<Group>> getAllGroup() {
-        return ResponseEntity.ok().body(groupService.getAllGroup());
-    }
+    public ResponseEntity<List<Group>> getAllGroup() { return ResponseEntity.ok().body(groupService.getAllGroup()); }
 
     @GetMapping("/groups/{id}")
     public ResponseEntity<Group> getGroupById(@PathVariable String id) {
@@ -35,6 +35,11 @@ public class GroupController {
     public ResponseEntity<Group> updateGroup(@PathVariable String id, @RequestBody Group group) {
         group.setId(id);
         return ResponseEntity.ok().body(groupService.updateGroup(group));
+    }
+
+    @PutMapping("/groups/join/{id}")
+    public ResponseEntity<Group> joinGroup(@PathVariable String id, @RequestBody User user) {
+        return ResponseEntity.ok().body(groupService.joinGroup(id, user));
     }
 
     @DeleteMapping("/groups/{id}")
