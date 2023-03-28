@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 
-@Document(collection = "roles")
+@Document(collection = "role")
 public class Role {
     @Id
     private String id;
