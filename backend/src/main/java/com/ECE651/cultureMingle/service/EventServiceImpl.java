@@ -88,6 +88,15 @@ public class EventServiceImpl implements EventService {
 
             eventRepository.save(eventUpdate);
 
+            User userUpdate = userDb.get();
+
+            Set<Event> eventHistory = userUpdate.getEventHistory();
+            eventHistory.add(eventUpdate);
+
+            userUpdate.setEventHistory(eventHistory);
+
+            userRepository.save(userUpdate);
+
             return eventUpdate;
 
         } else if (!eventDb.isPresent()) {

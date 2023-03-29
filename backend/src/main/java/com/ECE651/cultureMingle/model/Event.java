@@ -36,8 +36,6 @@ public class Event {
     @DBRef
     private Set<User> attendees = new HashSet<>();
 
-    public Event() { }
-
     @Override
     public String toString() { return "Event (id=" + id + ", title=" + title + ")"; }
 }
