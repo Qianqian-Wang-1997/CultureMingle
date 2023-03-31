@@ -88,6 +88,15 @@ public class EventServiceImpl implements EventService {
 
             eventRepository.save(eventUpdate);
 
+            User userUpdate = userDb.get();
+
+            Set<Event> eventHistory = userUpdate.getEventHistory();
+            eventHistory.add(eventUpdate);
+
+            userUpdate.setEventHistory(eventHistory);
+
+            userRepository.save(userUpdate);
+
             return eventUpdate;
 
         } else if (!eventDb.isPresent()) {
@@ -109,17 +118,6 @@ public class EventServiceImpl implements EventService {
             return eventDb.get();
         } else {
             throw new ResourceNotFoundException("Event not found with id: " + id);
-        }
-    }
-
-    @Override
-    public void joinEvent(String id, User user) {
-        Optional<Event> eventDb = eventRepository.findById(id);
-
-        if (eventDb.isPresent()) {
-            Event eventUpdate = eventDb.get();
-            eventUpdate.setAttendees(eventUpdate.getAttendees());
-
         }
     }
 

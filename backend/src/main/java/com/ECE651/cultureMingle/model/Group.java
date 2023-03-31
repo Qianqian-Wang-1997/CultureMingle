@@ -33,8 +33,6 @@ public class Group {
     @DBRef
     private Set<Event> events = new HashSet<>();
 
-    public Group() { }
-
     @Override
     public String toString() { return "Group (id=" + id + ", name=" + groupName + ")"; }
 }
