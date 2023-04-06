@@ -1,15 +1,12 @@
 import styles from "./registration.module.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
-import { EditFilled, HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Select, DatePicker } from 'antd';
 import { useState } from 'react';
-import moment from 'moment';
-import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 const { Option } = Select;
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const layout = {
     labelCol: {
@@ -35,7 +32,8 @@ const Registration = () => {
     const [password, setPassWord] = useState("");
     const [day, setDay] = useState("");
     const [gender, setGender] = useState("");
-
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
     // const [birthday,setBirthday] = useState(""); 
     // const handleDate = (date, dateString) => {
     //     setBirthday(dateString);
@@ -46,24 +44,28 @@ const Registration = () => {
         username: name,
         email: email,
         password: password,
-        birthday: day,
+        // birthday: day,
         gender: gender
     }
     const onFinish = async(e) => {
         console.log(wholeform);
-        //console.log(e);
         try {
             axios.post(
-                'http://localhost:8080/register/',
+                'http://localhost:8080/api/auth/signup',
                 wholeform,
             ).then(
                 res=>{
+                    console.log("status:"+res.status);
                     console.log(res);
-                    console.log(res.data);
+                    setMessage(res.data.message);
+                    navigate('/login',{replace:true});
                 }
-            )
+            ).catch((error)=>{
+                console.log(error.response.data.message);
+                setMessage(error.response.data.message);
+            })
         } catch (err) {
-            console.log(err);
+            console.log(err.response.data);
         }
     };
     const handleSubmit = async(e)=>{
@@ -81,13 +83,7 @@ const Registration = () => {
         <Space direction="vertical" className={styles.spaceStyle} size={[0, 48]}>
             <Layout>
                 <Layout>
-                    {/* <Sider className={styles.siderStyle} width={'10%'}></Sider> */}
                     <Content className={styles.contentStyle} >
-                        <div className={styles.logo}>
-                            {/* <HeartOutlined style={{ fontSize: '30px', color: 'pink' }} />
-                            CultureMingle
-                            <HeartOutlined style={{ fontSize: '30px', color: 'pink' }} /> */}
-                        </div>
                         <div className={styles.content}>
                             <Form {...layout} form={form} name="control-hooks" 
                                 onFinish={onFinish} 
@@ -96,6 +92,8 @@ const Registration = () => {
                                 <Form.Item name="name" label="Name"
                                     rules={[
                                         { required: true, message: "Please input your name." },
+                                        {min: 3, message:'Username should be at least 3 characters in length.'},
+                                        {max: 20, message:'Username should be at most 20 characters in length.'}
                                     ]}
                                     onChange={(e) => setName(e.target.value)}
                                 >
@@ -106,7 +104,8 @@ const Registration = () => {
                                 <Form.Item name="email" label={<label>E-mail</label>}
                                     rules={[
                                         { required: true, message: "Please input your email address.", },
-                                        { type: 'email', message: "Please input a valid email address." }
+                                        { type: 'email', message: "Please input a valid email address." },
+                                        { max: 50, message:'Email should be at most 50 characters in length.'}
                                     ]}
                                     onChange={(e) => setEmail(e.target.value)}
                                 >
@@ -116,7 +115,9 @@ const Registration = () => {
                                 {/* Password */}
                                 <Form.Item name='password' label="Password"
                                     rules={[
-                                        { required: true, message: 'Please input your password.', }
+                                        { required: true, message: 'Please input your password.', },
+                                        { min:6, message:'Password should be at least 6 characters in length.'},
+                                        { max: 40, message:'Password should be at most 40 characters in length.'}
                                     ]}
                                     onChange={(e) => setPassWord(e.target.value)}
                                 >
@@ -180,9 +181,10 @@ const Registration = () => {
                                         ) : null
                                     }
                                 </Form.Item>
-
+                                    
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
+                                    <div className={styles.hint}>{message}</div>
                                     <Button type="primary" htmlType="submit" className={styles.buttonStyle} onSubmit = {handleSubmit}>
                                         Submit
                                     </Button>
@@ -196,7 +198,7 @@ const Registration = () => {
                                     </div>
                                     
                                 </Form.Item>
-
+                                    
                             </Form>
                         </div>
                     </Content>
