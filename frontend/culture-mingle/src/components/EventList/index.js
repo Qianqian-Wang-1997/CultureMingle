@@ -7,7 +7,6 @@ function EventList({ eventList }) {
     const getData = async () => {
       const { data } = await axios.get("/events");
       setData(data);
-      console.log(data[0])
     };
     useEffect(() => {
       getData();
