@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.css';
 import EventList from "../EventList/index"
+import Groups from "../GroupList/index"
 
 import { Layout } from 'antd';
 
@@ -14,6 +15,7 @@ const Home = () => {
         <p className={styles.contentTitle}>Upcoming Events</p>
         <EventList />
         <p className={styles.contentTitle}>Popular groups</p>
+        <Groups />
         <p className={styles.contentTitle}>Get Started</p>
       </div>
     </Content>
