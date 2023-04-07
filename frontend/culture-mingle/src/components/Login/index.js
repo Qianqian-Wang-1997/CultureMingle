@@ -1,11 +1,11 @@
 import styles from "./login.module.css"
 import axios from 'axios';
 import { Layout, Space } from 'antd';
-import { Button, Form, Input, Select, DatePicker } from 'antd';
-import { useState } from 'react';
+import { Button, Form, Input} from 'antd';
+import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer,Content } = Layout;
 
 const layout = {
     labelCol: {
@@ -24,12 +24,13 @@ const tailLayout = {
     textalign: 'center',
 };
 
-const Login = (props) => {
+const Login = () => {
     const [form] = Form.useForm();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassWord] = useState("");
     const [message, setMessage] = useState("");
+    const [userId, setUserId] = useState("");
     const navigate = useNavigate();
     const wholeform = {
         username: name,
@@ -44,10 +45,13 @@ const Login = (props) => {
                 wholeform,
             ).then(
                 res=>{
-                    console.log(res);
-                    console.log(res.data);
-                    props.saveToken(email);
+                    console.log(res.data.id);
+                    setUserId(res.data.id);
+                    localStorage.setItem("userId", res.data.id);
+                    localStorage.setItem("userName", res.data.username);
+                    localStorage.setItem("userEmail", res.data.email);
                     navigate('/',{replace:true});
+                    window.location.reload();
                 }
             ).catch((error)=>{
                 console.log(error.response.data.message);
