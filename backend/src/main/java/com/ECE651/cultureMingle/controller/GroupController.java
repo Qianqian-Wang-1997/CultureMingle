@@ -1,7 +1,6 @@
 package com.ECE651.cultureMingle.controller;
 
 import com.ECE651.cultureMingle.model.Group;
-import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.service.GroupService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,14 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.updateGroup(group));
     }
 
-    @PutMapping("/groups/join/{id}")
-    public ResponseEntity<Group> joinGroup(@PathVariable String id, @RequestBody User user) {
-        return ResponseEntity.ok().body(groupService.joinGroup(id, user));
+    @PutMapping("/groups/join/{userId}&{groupId}")
+    public ResponseEntity<Group> joinGroup(@PathVariable String userId, @PathVariable String groupId) {
+        return ResponseEntity.ok().body(groupService.joinGroup(userId, groupId));
+    }
+
+    @PutMapping("/groups/join/{userId}&{groupId}")
+    public ResponseEntity<Group> organizeGroup(@PathVariable String userId, @PathVariable String groupId) {
+        return ResponseEntity.ok().body(groupService.organizeGroup(userId, groupId));
     }
 
     @DeleteMapping("/groups/{id}")

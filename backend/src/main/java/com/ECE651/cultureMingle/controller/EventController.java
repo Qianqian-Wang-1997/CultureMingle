@@ -1,7 +1,6 @@
 package com.ECE651.cultureMingle.controller;
 
 import com.ECE651.cultureMingle.model.Event;
-import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.service.EventService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,19 @@ public class EventController {
         return ResponseEntity.ok().body(eventService.updateEvent(event));
     }
 
-    @PutMapping("/events/join/{id}")
-    public ResponseEntity<Event> joinEvent(@PathVariable String id, @RequestBody User user) {
-        return ResponseEntity.ok().body(eventService.joinEvent(id, user));
+    @PutMapping("/events/join/{userId}&{eventId}")
+    public ResponseEntity<Event> joinEvent(@PathVariable String userId, @PathVariable String eventId) {
+        return ResponseEntity.ok().body(eventService.joinEvent(userId, eventId));
+    }
+
+    @PutMapping("/events/host/{userId}&{eventId}")
+    public ResponseEntity<Event> hostEvent(@PathVariable String userId, @PathVariable String eventId) {
+        return ResponseEntity.ok().body(eventService.hostEvent(userId, eventId));
+    }
+
+    @PutMapping("/events/bind/{groupId}&{eventId}")
+    public ResponseEntity<Event> bindEvent(@PathVariable String groupId, @PathVariable String eventId) {
+        return ResponseEntity.ok().body(eventService.bindEvent(groupId, eventId));
     }
 
     @DeleteMapping("/events/{id}")

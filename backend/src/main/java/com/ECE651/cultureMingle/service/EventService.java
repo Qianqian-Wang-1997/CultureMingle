@@ -1,7 +1,6 @@
 package com.ECE651.cultureMingle.service;
 
 import com.ECE651.cultureMingle.model.Event;
-import com.ECE651.cultureMingle.model.User;
 
 import java.util.List;
 
@@ -11,7 +10,11 @@ public interface EventService {
 
     Event updateEvent(Event event);
 
-    Event joinEvent(String id, User user);
+    Event joinEvent(String userId, String eventId);
+
+    Event hostEvent(String userId, String eventId);
+
+    Event bindEvent(String groupId, String eventId);
 
     List<Event> getAllEvent();
 

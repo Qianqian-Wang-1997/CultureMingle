@@ -68,28 +68,58 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group joinGroup(String id, User user) {
+    public Group joinGroup(String userId, String groupId) {
 
-        Optional<Group> groupDb = groupRepository.findById(id);
-        Optional<User> userDb = userRepository.findById(user.getId());
+        Optional<Group> groupDb = groupRepository.findById(groupId);
+        Optional<User> userDb = userRepository.findById(userId);
 
         if (groupDb.isPresent() && userDb.isPresent()) {
 
             Group groupUpdate = groupDb.get();
-
-            Set<User> members = groupUpdate.getMembers();
-            members.add(user);
-
+            Set<String> members = groupUpdate.getMembers();
+            members.add(userId);
             groupUpdate.setMembers(members);
-
             groupRepository.save(groupUpdate);
+
+            User userUpdate = userDb.get();
+            Set<String> groups = userUpdate.getGroups();
+            groups.add(groupId);
+            userUpdate.setGroups(groups);
+            userRepository.save(userUpdate);
 
             return groupUpdate;
 
         } else if (!groupDb.isPresent()) {
-            throw new ResourceNotFoundException("Group not found with id: " + id);
+            throw new ResourceNotFoundException("Group not found with id: " + groupId);
         } else {
-            throw new ResourceNotFoundException("User not found with id: " + user.getId());
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    @Override
+    public Group organizeGroup(String userId, String groupId) {
+
+        Optional<Group> groupDb = groupRepository.findById(groupId);
+        Optional<User> userDb = userRepository.findById(userId);
+
+        if (groupDb.isPresent() && userDb.isPresent()) {
+
+            Group groupUpdate = groupDb.get();
+            groupUpdate.setOrganizer(userId);
+            groupRepository.save(groupUpdate);
+
+            User userUpdate = userDb.get();
+            Set<String> groups = userUpdate.getGroups();
+            groups.add(groupId);
+            userUpdate.setGroups(groups);
+            userRepository.save(userUpdate);
+
+            return groupUpdate;
+
+        } else if (!groupDb.isPresent()) {
+            throw new ResourceNotFoundException("Group not found with id: " + groupId);
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
         }
     }
 
