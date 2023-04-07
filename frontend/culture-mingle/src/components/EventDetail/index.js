@@ -11,6 +11,7 @@ const { Footer, Sider, Content } = Layout;
 
 const EventDetail = (props) => {
     const { eventId } = useParams();
+    let userId = localStorage.getItem("userId");
     const { Meta } = Card;
 
     // Join Button
@@ -22,6 +23,18 @@ const EventDetail = (props) => {
     };
     const handleJoinOk = () => { // Post Request!
         setLoading(true);
+        try {
+            axios.put(
+                `http://localhost:8080/events/join/${userId}&${eventId}`,
+            ).then(
+                res=>{
+                    console.log(res);
+                    console.log(res.data);
+                }
+            )
+        } catch (err) {
+            console.log(err);
+        }
         setTimeout(() => {
             setLoading(false);
             setOpen(false);
