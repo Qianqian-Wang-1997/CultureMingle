@@ -1,12 +1,11 @@
-import React, { Children, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import { NavLink } from 'react-router-dom';
 import { Layout, Col, Button, Row, Dropdown } from 'antd';
 import CreateGroup from '../CreateGroup';
 
 const { Header } = Layout;
-//const isLogined = true;
-const userId = "1234567"
+//const userId = "1234567"
 
 const items = [
   {
@@ -20,10 +19,12 @@ const items = [
 ];
 
 
-const CMHeader = (isLogined) => {
+const CMHeader = () => {
+  let userId = localStorage.getItem("userId");
   const handleLogout=(e)=>{
-    isLogined.token = null;
-    console.log("click logout")
+    localStorage.clear();
+    console.log("click logout");
+    window.location.reload();
   }
 
   const [open, setOpen] = useState(false);
@@ -35,7 +36,7 @@ const CMHeader = (isLogined) => {
   return (
     <Header theme='light' className={styles.header}>
       <Row>
-        {isLogined.token==null ?
+        {userId==null ?
           <>
             <Col span={21} order={1} className={styles.headerLogo}>
               <NavLink to='/' style={{ color: 'black', marginLeft:'10%' }}>

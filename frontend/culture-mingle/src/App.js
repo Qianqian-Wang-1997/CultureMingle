@@ -19,7 +19,6 @@ import Groups from "./components/GroupList"
 const { Content, Footer } = Layout;
 
 function App() {
-  const [token, setToken] = useState();
   return (
     <ConfigProvider
       theme={{
@@ -33,11 +32,11 @@ function App() {
           <Layout>
             <CMSider />
             <Layout>
-              <CMHeader token={token}/>
+              <CMHeader/>
               <Content className="homeLayout">
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route exact path="/login" element={<Login saveToken={setToken}/>} />
+                  <Route exact path="/login" element={<Login/>} />
                   <Route exact path='/events/:eventId' element={<EventDetail />} />
                   <Route exact path='/groups' element={<Groups />} />
 
