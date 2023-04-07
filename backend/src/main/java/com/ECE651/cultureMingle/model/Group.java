@@ -2,7 +2,6 @@ package com.ECE651.cultureMingle.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -27,12 +26,11 @@ public class Group {
 
     private String logoUrl;
 
-    @DBRef
-    private Set<User> members = new HashSet<>();
+    private Set<String> members = new HashSet<>();
 
-    @DBRef
-    private Set<Event> events = new HashSet<>();
+    private Set<String> events = new HashSet<>();
 
     @Override
     public String toString() { return "Group (id=" + id + ", name=" + groupName + ")"; }
+
 }

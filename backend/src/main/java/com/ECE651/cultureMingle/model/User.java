@@ -59,5 +59,8 @@ public class User {
 
     private String avatar;
 
-    private Set<Event> eventHistory = new HashSet<>();
+    private Set<String> eventHistory = new HashSet<>();
+
+    private Set<String> groups = new HashSet<>();
+
 }

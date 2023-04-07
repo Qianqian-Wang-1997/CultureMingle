@@ -2,15 +2,16 @@ package com.ECE651.cultureMingle.service;
 
 import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
 import com.ECE651.cultureMingle.model.Event;
+import com.ECE651.cultureMingle.model.Group;
 import com.ECE651.cultureMingle.model.User;
 import com.ECE651.cultureMingle.repository.EventRepository;
 
+import com.ECE651.cultureMingle.repository.GroupRepository;
 import com.ECE651.cultureMingle.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -21,6 +22,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -72,37 +76,85 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event joinEvent(String id, User user) {
+    public Event joinEvent(String userId, String eventId) {
 
-        Optional<Event> eventDb = eventRepository.findById(id);
-        Optional<User> userDb = userRepository.findById(user.getId());
+        Optional<Event> eventDb = eventRepository.findById(eventId);
+        Optional<User> userDb = userRepository.findById(userId);
 
         if (eventDb.isPresent() && userDb.isPresent()) {
 
             Event eventUpdate = eventDb.get();
-
-            Set<User> attendees = eventUpdate.getAttendees();
-            attendees.add(user);
-
+            Set<String> attendees = eventUpdate.getAttendees();
+            attendees.add(userId);
             eventUpdate.setAttendees(attendees);
-
             eventRepository.save(eventUpdate);
 
             User userUpdate = userDb.get();
-
-            Set<Event> eventHistory = userUpdate.getEventHistory();
-            eventHistory.add(eventUpdate);
-
+            Set<String> eventHistory = userUpdate.getEventHistory();
+            eventHistory.add(eventId);
             userUpdate.setEventHistory(eventHistory);
-
             userRepository.save(userUpdate);
 
             return eventUpdate;
 
         } else if (!eventDb.isPresent()) {
-            throw new ResourceNotFoundException("Event not found with id: " + id);
+            throw new ResourceNotFoundException("Event not found with id: " + eventId);
         } else {
-            throw new ResourceNotFoundException("User not found with id: " + user.getId());
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    @Override
+    public Event hostEvent(String userId, String eventId) {
+
+        Optional<Event> eventDb = eventRepository.findById(eventId);
+        Optional<User> userDb = userRepository.findById(userId);
+
+        if (eventDb.isPresent() && userDb.isPresent()) {
+
+            Event eventUpdate = eventDb.get();
+            eventUpdate.setHost(userId);
+            eventRepository.save(eventUpdate);
+
+            User userUpdate = userDb.get();
+            Set<String> eventHistory = userUpdate.getEventHistory();
+            eventHistory.add(eventId);
+            userUpdate.setEventHistory(eventHistory);
+            userRepository.save(userUpdate);
+
+            return eventUpdate;
+
+        } else if (!eventDb.isPresent()) {
+            throw new ResourceNotFoundException("Event not found with id: " + eventId);
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    @Override
+    public Event bindEvent(String groupId, String eventId) {
+
+        Optional<Event> eventDb = eventRepository.findById(eventId);
+        Optional<Group> groupDb = groupRepository.findById(groupId);
+
+        if (eventDb.isPresent() && groupDb.isPresent()) {
+
+            Event eventUpdate = eventDb.get();
+            eventUpdate.setGroup(groupId);
+            eventRepository.save(eventUpdate);
+
+            Group groupUpdate = groupDb.get();
+            Set<String> events = groupUpdate.getEvents();
+            events.add(eventId);
+            groupUpdate.setEvents(events);
+            groupRepository.save(groupUpdate);
+
+            return eventUpdate;
+
+        } else if (!eventDb.isPresent()) {
+            throw new ResourceNotFoundException("Event not found with id: " + eventId);
+        } else {
+            throw new ResourceNotFoundException("Group not found with id: " + groupId);
         }
     }
 
