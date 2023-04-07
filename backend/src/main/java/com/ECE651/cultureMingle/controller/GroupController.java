@@ -41,7 +41,7 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.joinGroup(userId, groupId));
     }
 
-    @PutMapping("/groups/join/{userId}&{groupId}")
+    @PutMapping("/groups/organize/{userId}&{groupId}")
     public ResponseEntity<Group> organizeGroup(@PathVariable String userId, @PathVariable String groupId) {
         return ResponseEntity.ok().body(groupService.organizeGroup(userId, groupId));
     }
