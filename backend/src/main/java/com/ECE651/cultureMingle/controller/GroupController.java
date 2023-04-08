@@ -25,10 +25,10 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.getGroupById(id));
     }
 
-    @PostMapping("/groups/{userId}")
-    public ResponseEntity<Group> createGroup(@PathVariable String userId, @RequestBody Group group) {
+    @PostMapping("/groups/")
+    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
         groupService.createGroup(group);
-        groupService.organizeGroup(userId, group.getId());
+        groupService.organizeGroup(group.getOrganizer(), group.getId());
         return ResponseEntity.ok().body(group);
     }
 
