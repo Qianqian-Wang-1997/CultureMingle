@@ -1,19 +1,26 @@
 package com.ECE651.cultureMingle.payload.response;
 
-import java.util.List;
+import lombok.Data;
 
+import java.util.List;
+@Data
 public class UserInfoResponse {
     private String id;
     private String username;
     private String email;
-//    private List<String> roles;
+    //    private List<String> roles;
+    private String gender;
+
+    private String dateOfBirth;
 
     private String jwt;
 
-    public UserInfoResponse(String id, String username, String email, String jwt) {
+    public UserInfoResponse(String id, String username, String email, String jwt, String gender, String dateOfBirth) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.jwt = jwt;
     }
 
