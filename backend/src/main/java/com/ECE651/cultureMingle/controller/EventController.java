@@ -25,10 +25,10 @@ public class EventController {
         return ResponseEntity.ok().body(eventService.getEventById(id));
     }
 
-    @PostMapping("/events/{userId}")
-    public ResponseEntity<Event> createEvent(@PathVariable String userId, @RequestBody Event event) {
+    @PostMapping("/events")
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         eventService.createEvent(event);
-        eventService.hostEvent(userId, event.getId());
+        eventService.hostEvent(event.getHost(), event.getId());
         if (event.getGroup() != null) {
             eventService.bindEvent(event.getGroup(), event.getId());
         }
