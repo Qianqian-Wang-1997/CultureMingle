@@ -5,8 +5,6 @@ import { Layout, Col, Button, Row, Dropdown } from 'antd';
 import CreateGroup from '../CreateGroup';
 
 const { Header } = Layout;
-//const userId = "1234567"
-
 const items = [
   {
     key: '1',
