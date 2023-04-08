@@ -25,9 +25,11 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.getGroupById(id));
     }
 
-    @PostMapping("/groups")
-    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
-        return ResponseEntity.ok().body(groupService.createGroup(group));
+    @PostMapping("/groups/{userId}")
+    public ResponseEntity<Group> createGroup(@PathVariable String userId, @RequestBody Group group) {
+        groupService.createGroup(group);
+        groupService.organizeGroup(userId, group.getId());
+        return ResponseEntity.ok().body(group);
     }
 
     @PutMapping("/groups/{id}")
@@ -39,11 +41,6 @@ public class GroupController {
     @PutMapping("/groups/join/{userId}&{groupId}")
     public ResponseEntity<Group> joinGroup(@PathVariable String userId, @PathVariable String groupId) {
         return ResponseEntity.ok().body(groupService.joinGroup(userId, groupId));
-    }
-
-    @PutMapping("/groups/organize/{userId}&{groupId}")
-    public ResponseEntity<Group> organizeGroup(@PathVariable String userId, @PathVariable String groupId) {
-        return ResponseEntity.ok().body(groupService.organizeGroup(userId, groupId));
     }
 
     @DeleteMapping("/groups/{id}")
