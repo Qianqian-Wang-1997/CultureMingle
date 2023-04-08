@@ -19,7 +19,9 @@ before_script:
 
 build:
   stage: build
-  script: ./backend/gradlew build
+  script: 
+    - cd backend 
+    - ./gradlew build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -29,7 +31,9 @@ build:
 
 test:
   stage: test
-  script: ./backend/gradlew test
+  script: 
+    - cd backend
+    - ./gradlew build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
