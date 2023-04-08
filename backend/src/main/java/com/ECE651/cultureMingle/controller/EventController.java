@@ -25,9 +25,14 @@ public class EventController {
         return ResponseEntity.ok().body(eventService.getEventById(id));
     }
 
-    @PostMapping("/events")
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        return ResponseEntity.ok().body(eventService.createEvent(event));
+    @PostMapping("/events/{userId}")
+    public ResponseEntity<Event> createEvent(@PathVariable String userId, @RequestBody Event event) {
+        eventService.createEvent(event);
+        eventService.hostEvent(userId, event.getId());
+        if (event.getGroup() != null) {
+            eventService.bindEvent(event.getGroup(), event.getId());
+        }
+        return ResponseEntity.ok().body(event);
     }
 
     @PutMapping("/events/{id}")
@@ -39,16 +44,6 @@ public class EventController {
     @PutMapping("/events/join/{userId}&{eventId}")
     public ResponseEntity<Event> joinEvent(@PathVariable String userId, @PathVariable String eventId) {
         return ResponseEntity.ok().body(eventService.joinEvent(userId, eventId));
-    }
-
-    @PutMapping("/events/host/{userId}&{eventId}")
-    public ResponseEntity<Event> hostEvent(@PathVariable String userId, @PathVariable String eventId) {
-        return ResponseEntity.ok().body(eventService.hostEvent(userId, eventId));
-    }
-
-    @PutMapping("/events/bind/{groupId}&{eventId}")
-    public ResponseEntity<Event> bindEvent(@PathVariable String groupId, @PathVariable String eventId) {
-        return ResponseEntity.ok().body(eventService.bindEvent(groupId, eventId));
     }
 
     @DeleteMapping("/events/{id}")
