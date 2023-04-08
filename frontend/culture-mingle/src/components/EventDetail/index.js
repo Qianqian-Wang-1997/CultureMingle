@@ -1,18 +1,18 @@
 import styles from './index.module.css';
 import 'antd/dist/reset.css';
-import { Layout, Space, Card, Button, Avatar, Col, Row, Modal, FloatButton } from 'antd';
+import { Layout, Space, Card, Button, Modal, FloatButton } from 'antd';
 import { ShareAltOutlined, UsergroupAddOutlined, TwitterOutlined, FacebookOutlined, InstagramOutlined, SlackOutlined, FrownOutlined } from '@ant-design/icons';
 import { useEffect, useState, React } from 'react';
 import axios from 'axios';
 import { normalizeDate } from '../../store/events'
 import { useParams } from 'react-router-dom';
+import MemberList from '../MemberList';
 
 const { Footer, Sider, Content } = Layout;
 
 const EventDetail = (props) => {
     const { eventId } = useParams();
     let userId = localStorage.getItem("userId");
-    const { Meta } = Card;
 
     // Join Button
     const [loading, setLoading] = useState(false);
@@ -105,21 +105,11 @@ const EventDetail = (props) => {
         { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
     ];
 
-    const attendeesList = attendees.map(
-        (attendee) => (
-            <Col className="gutter-row" span={'30%'}>
-                <Card hoverable style={{ width: 240 }}>
-                    <Meta avatar={<Avatar size={50} src={attendee.avatar} />} title={attendee.name} description={attendee.identity} />
-                </Card>
-            </Col>
-        )
-    );
-
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
 
             <Layout>
-                <div className={styles.headerStyle}>
+                <div className={styles.headerStyle} data-testid="1">
                     <div className={styles.time}>
                         {normalizeDate(data.time)}
                     </div>
@@ -136,9 +126,7 @@ const EventDetail = (props) => {
                         </div>
                         <div className={styles.subtitles}>Attendees</div>
                         <div className={styles.anttendees}>
-                            <Row gutter={[16, 24]}>
-                                {attendeesList}
-                            </Row>
+                            <MemberList list={attendees}></MemberList>
                         </div>
                     </Content>
 

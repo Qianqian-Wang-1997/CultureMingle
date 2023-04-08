@@ -7,3 +7,11 @@ test('mytest', () => {
     const mytest = screen.getByTestId('1');
     expect(mytest).toHaveTextContent();
 })
+
+window.matchMedia = window.matchMedia || function() {
+    return {
+        matches: false,
+        addListener: function() {},
+        removeListener: function() {}
+    };
+};
