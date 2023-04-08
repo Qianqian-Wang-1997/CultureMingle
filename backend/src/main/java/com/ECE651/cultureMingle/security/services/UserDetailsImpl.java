@@ -2,6 +2,7 @@ package com.ECE651.cultureMingle.security.services;
 
 import com.ECE651.cultureMingle.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+@Data
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -20,17 +21,24 @@ public class UserDetailsImpl implements UserDetails {
 
     private String email;
 
+    private String gender;
+
+    private String dateOfBirth;
+
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(String id, String username, String email, String password,
+                           String gender, String dateOfBirth,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.authorities = authorities;
     }
 
@@ -44,6 +52,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getGender(),
+                user.getDateOfBirth(),
                 authorities);
     }
 
@@ -90,13 +100,13 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        UserDetailsImpl user = (UserDetailsImpl) o;
-        return Objects.equals(id, user.id);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o)
+//            return true;
+//        if (o == null || getClass() != o.getClass())
+//            return false;
+//        UserDetailsImpl user = (UserDetailsImpl) o;
+//        return Objects.equals(id, user.id);
+//    }
 }
