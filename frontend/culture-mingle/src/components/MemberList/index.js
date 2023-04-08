@@ -5,7 +5,7 @@ const MemberList = ({list}) => {
     const { Meta } = Card;
     const attendeesList = list.map(
         (attendee) => (
-            <Col className="gutter-row" span={'30%'}>
+            <Col className="gutter-row" span={'30%'} key={attendee.name}>
                 <Card hoverable style={{ width: 240 }}>
                     <Meta avatar={<Avatar size={50} src={attendee.avatar} />} title={attendee.name} description={attendee.identity} />
                 </Card>
