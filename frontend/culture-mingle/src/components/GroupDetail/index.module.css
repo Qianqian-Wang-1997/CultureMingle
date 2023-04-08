@@ -1,3 +1,11 @@
+.header {
+    text-align: center;
+    background-color: white !important;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
 .group{
     background-color: #feeff5;
 }
@@ -15,16 +23,34 @@
 
 .groupTitle {
     font-weight: 700;
+    font-size: large;
+    color: #404040;
 }
 
 .groupContent {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
     padding-left: 5vh;
 }
 
 .groupDesc {
     align-items: center;
     justify-content: center;
-
+    font-size: medium;
+    color: #5a5a5a;
 }
+.icon {
+    padding: 5px;
+}
+
+.about {
+    padding: 10px 10%;
+}
+
+.noContent {
+    align-items: center;
+    justify-content: center;
+    color:#c11c7b;
+    font-size: x-large;
+    height: 100%;
+}
+

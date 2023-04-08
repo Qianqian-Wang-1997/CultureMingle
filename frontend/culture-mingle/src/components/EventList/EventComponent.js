@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 
 function EventComponent({ event }) {
+    // console.log(event)
     return (
         <NavLink to={`/events/${event.id}`} style={{ color: 'black' }}>
             <div className={styles.eventLayout}>
@@ -15,7 +16,7 @@ function EventComponent({ event }) {
                             {normalizeDate(event.time)}
                         </div>
                         <div className={styles.eventName}>{event.title}</div>
-                        <div className={styles.eventGroup}>{event.group.groupName}</div>
+                        {/* <div className={styles.eventGroup}>{event.group.groupName}</div> */}
                         <div className={styles.eventLocation}>{event.location}</div>
                         <div className={styles.eventAttendee}>5 attendees</div>
                     </Col>
