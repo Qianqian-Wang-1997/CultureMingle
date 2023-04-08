@@ -11,6 +11,7 @@ const { Footer, Sider, Content } = Layout;
 
 const EventDetail = (props) => {
     const { eventId } = useParams();
+    let userId = localStorage.getItem("userId");
     const { Meta } = Card;
 
     // Join Button
@@ -22,6 +23,18 @@ const EventDetail = (props) => {
     };
     const handleJoinOk = () => { // Post Request!
         setLoading(true);
+        try {
+            axios.put(
+                `http://localhost:8080/events/join/${userId}&${eventId}`,
+            ).then(
+                res=>{
+                    console.log(res);
+                    console.log(res.data);
+                }
+            )
+        } catch (err) {
+            console.log(err);
+        }
         setTimeout(() => {
             setLoading(false);
             setOpen(false);
@@ -52,13 +65,24 @@ const EventDetail = (props) => {
     // Get event details data from the BackEnd
     const [data, setData] = useState([]);
     const [description, setDescription] = useState([]);
-    const getData = async () => {
-        const { data } = await axios.get(`/events/${eventId}`);
-        setData(data);
-        setDescription(data.description);
-    };
+    const [groupName, setGroupName] = useState("");
     useEffect(() => {
-        getData();
+        axios.get(`/events/${eventId}`).then((response) => {
+            setData(response.data);
+            setDescription(response.data.description);
+            // Get group name from group id
+            if(response.data.group != "") {
+                axios.get(`/groups/${response.data.group}`).then((groupResponse) => {
+                    setGroupName(groupResponse.data.groupName);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            } else {
+                setGroupName("This event does not have a group");
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     // Set description as paragraphs
@@ -120,11 +144,10 @@ const EventDetail = (props) => {
 
                     <Sider className={styles.siderStyle} width='30%'>
                         <Card title="Location" extra={<a href="https://www.google.com/maps">Open in Google Map</a>} className={styles.card}>
-                            {data.location}
+                            {data.venue}
                         </Card>
                         <Card title="Group" className={styles.card}>
-                            UWaterloo Chinese Students Group
-                            {/* {data.group} */}
+                            {groupName}
                         </Card>
                     </Sider>
 

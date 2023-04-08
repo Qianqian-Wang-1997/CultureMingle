@@ -15,14 +15,14 @@ const CreateEvent = () => {
     const [time, setTime] = useState("");
     const [group, setGroup] = useState("");
     const [des, setDes] = useState("");
-    const [photo, setPhoto] = useState("");
+    const [photo, setPhoto] = useState([]);
     const eventform = {
         title: title,
-        location: location,
+        venue: location,
         time: time,
         group: group,
         description: des,
-        photo: photo
+        imageUrls: photo
     }
 
     const onFinish = () => {
@@ -48,6 +48,7 @@ const CreateEvent = () => {
 
     // Group list
     const groups = [
+        { value: ""},
         { value: "Uwaterloo Chinese Students Group"},
         { value: "Uwaterloo Indian Students Group"},
         { value: "Uwaterloo Canadian Students Group"},
@@ -61,11 +62,15 @@ const CreateEvent = () => {
         )
     );
 
+    const initialValues = {
+        group: '',
+    };
+
     return (
         <Space className={styles.page} direction="vertical" style={{display: 'flex', justifyContent:'center'}}>
             
             <Form labelCol={{span: 5,}} wrapperCol={{span: 13,}} layout="horizontal" size="large" 
-                form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}
+                form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} initialValues={initialValues}
             >
                 
                 <Form.Item label={<label style={{ fontSize: "18px" }}>Title</label>} name="title" 
@@ -88,7 +93,7 @@ const CreateEvent = () => {
                     <DatePicker showTime onChange={(e) => setTime(e.format("YYYY-MM-DD"))}/>
                 </Form.Item>
 
-                <Form.Item label={<label style={{ fontSize: "18px" }}>Group</label>}
+                <Form.Item label={<label style={{ fontSize: "18px" }}>Group</label>} name="group"
                     onChange={(e) => setGroup(e.target.value)}
                 >
                     <Select>
