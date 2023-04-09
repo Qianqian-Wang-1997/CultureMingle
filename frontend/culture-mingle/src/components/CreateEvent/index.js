@@ -3,29 +3,31 @@ import 'antd/dist/reset.css';
 import { Space, Button, DatePicker, Form, Input, Upload, Select, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const { TextArea } = Input;
 
 const CreateEvent = () => {
     const [form] = Form.useForm();
-
     const [title, setTitle] = useState("");
     const [location, setLocation] = useState("");
     const [time, setTime] = useState("");
     const [group, setGroup] = useState("");
     const [des, setDes] = useState("");
     const [photo, setPhoto] = useState([]);
+    
     const eventform = {
         title: title,
         venue: location,
         time: time,
         group: group,
         description: des,
-        imageUrls: photo
+        imageUrls: photo,
+        host: localStorage.getItem("userId")
     }
 
     const onFinish = () => {
+        console.log(group)
         try {
             axios.post(
                 'http://localhost:8080/events',
@@ -46,21 +48,28 @@ const CreateEvent = () => {
         message.error('Failed... Check your event details again!');
     };
 
-    // Group list
-    const groups = [
-        { value: ""},
-        { value: "Uwaterloo Chinese Students Group"},
-        { value: "Uwaterloo Indian Students Group"},
-        { value: "Uwaterloo Canadian Students Group"},
-        { value: "Uwaterloo Japanese Students Group"},
-        { value: "Uwaterloo American Students Group"}
-    ];
-
-    const grouplist = groups.map(
-        (group) => (
-            <Select.Option value={group.value}>{group.value}</Select.Option>
-        )
-    );
+    //Get user's groups & get group names
+    const [options, setOptions] = useState([]);
+    useEffect(() => {
+        const userid = localStorage.getItem("userId");
+        axios.get(`/users/${userid}`).then((response) => {
+            const groupIds = response.data.groups;
+            if(groupIds != null) {
+                const uniqueOptions = new Set(options);               
+                for (var i = 0; i < groupIds.length; i++) {               
+                    axios.get(`/groups/${groupIds[i]}`).then((groupResponse) => {
+                        const option = { value: groupResponse.data.id, label: groupResponse.data.groupName };
+                        if (!uniqueOptions.has(option)) { // check if option is unique
+                            uniqueOptions.add(option); // add option to the Set
+                            setOptions(Array.from(uniqueOptions)); // update options with unique options
+                        }
+                    })
+                }
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
 
     const initialValues = {
         group: '',
@@ -93,11 +102,9 @@ const CreateEvent = () => {
                     <DatePicker showTime onChange={(e) => setTime(e.format("YYYY-MM-DD"))}/>
                 </Form.Item>
 
-                <Form.Item label={<label style={{ fontSize: "18px" }}>Group</label>} name="group"
-                    onChange={(e) => setGroup(e.target.value)}
-                >
-                    <Select>
-                        {grouplist}
+                <Form.Item label={<label style={{ fontSize: "18px" }}>Group</label>} name="group">
+                    <Select options={options} onChange={value => {setGroup(value)}}>
+                        {/* {grouplist} */}
                     </Select>
                 </Form.Item>
                
