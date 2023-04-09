@@ -9,6 +9,9 @@ describe("EventComponent", () => {
     title: "Test Event",
     time: "2023-04-08T14:00:00Z",
     location: "Test Location",
+    attendees: [
+      "1", "2", "3","4","5"
+    ]
   };
 
   test("renders event details correctly", () => {
