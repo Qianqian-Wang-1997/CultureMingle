@@ -4,7 +4,7 @@ import axios from 'axios';
 // import { NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-import { Col, Row, Menu } from 'antd';
+import { Col, Row, Menu, Button } from 'antd';
 import {
     AimOutlined,
     UserOutlined,
@@ -12,6 +12,7 @@ import {
 
 import EventComponent from '../EventList/EventComponent';
 import MemberList from '../MemberList';
+import Join from '../Join';
 
 const items = [
     {
@@ -112,6 +113,7 @@ const GroupDetail = (props) => {
                     {currentGroup.attendees.length == 0 ? <div className={styles.noContent}>No Memeber Right Now</div> :
                         <MemberList list={currentGroup.attendees} />}
                 </div> : <></>}
+                <Join joinId={groupId} type="groups"></Join>
 
         </div>
     )
