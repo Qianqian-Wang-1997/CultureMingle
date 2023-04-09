@@ -52,7 +52,7 @@ front-test:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     paths:
-      - coverage/
+      - frontend/culture-mingle/coverage/
     when: always
     reports:
       junit:
