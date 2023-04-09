@@ -13,45 +13,42 @@ const { Sider, Content } = Layout;
 const EventDetail = (props) => {
     const { eventId } = useParams();
 
-    // Get event details data from the BackEnd
     const [data, setData] = useState([]);
     const [description, setDescription] = useState([]);
     const [groupName, setGroupName] = useState("");
     const [attendees, setAttendees] = useState([]);
     const [host, setHost] = useState({});
+    
     useEffect(() => {
-        axios.get(`/events/${eventId}`).then((response) => {
-            setData(response.data);
-            setDescription(response.data.description);
-            // Get group name from group id
-            if(response.data.group != "") {
-                axios.get(`/groups/${response.data.group}`).then((groupResponse) => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`/events/${eventId}`);
+                setData(response.data);
+                setDescription(response.data.description);
+                
+                // Get group name from group id
+                if(response.data.group !== "") {
+                    const groupResponse = await axios.get(`/groups/${response.data.group}`);
                     setGroupName(groupResponse.data.groupName);
-                }).catch((error) => {
-                    console.log(error);
-                });
-            } else {
-                setGroupName("This event does not have a group");
-            }
-            // Get host
-            axios.get(`/users/${response.data.host}`).then((hostResponse) => {
+                } else {
+                    setGroupName("This event does not have a group");
+                }
+                
+                // Get host
+                const hostResponse = await axios.get(`/users/${response.data.host}`);
                 const hostInfo = { 
                     avatar: "https://joesch.moe/api/v1/random?key=1", 
                     name: hostResponse.data.username, 
                     identity: "Host" 
                 };
-                console.log(hostInfo);
                 setHost(hostInfo);
-                //console.log(hostInfo);
-            }).catch((error) => {
-                console.log(error);
-            });
-            // Get attendees
-            const attendeeids = response.data.attendees;
-            var attendeesArr =[];
-            var i = 2;
-            if(attendeeids != null) {             
-                Promise.all(attendeeids.map(attendeeid => axios.get(`/users/${attendeeid}`))).then((responses) => {
+                const attendeesArr = [hostInfo];
+                
+                // Get attendees
+                const attendeeIds = response.data.attendees;
+                let i = 2;
+                if(attendeeIds != null) { 
+                    const responses = await Promise.all(attendeeIds.map(attendeeId => axios.get(`/users/${attendeeId}`)));
                     responses.forEach((attResponse) => {
                         const attendee = { 
                             avatar: `https://joesch.moe/api/v1/random?key=${i++}`, 
@@ -60,16 +57,17 @@ const EventDetail = (props) => {
                         };
                         attendeesArr.push(attendee);
                     });
-                    attendeesArr.push(host);
-                    setAttendees([...attendeesArr]);
-                });
-            } else {
-                setAttendees([host]);
+                    setAttendees(attendeesArr);
+                } else {
+                    setAttendees([hostInfo]);
+                }
+            } catch (error) {
+                console.log(error);
             }
-        }).catch((error) => {
-            console.log(error);
-        });
+        };
+        fetchData();
     }, []);
+    
 
     // Set description as paragraphs
     var paralists;
