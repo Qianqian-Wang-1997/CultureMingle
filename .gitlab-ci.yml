@@ -56,7 +56,7 @@ front-test:
     when: always
     reports:
       junit:
-        - junit.xml
+        - frontend/culture-mingle/junit.xml
 
 deploy:
   stage: deploy
