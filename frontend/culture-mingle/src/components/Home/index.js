@@ -16,7 +16,7 @@ const Home = () => {
         <EventList />
         <p className={styles.contentTitle}>Popular groups</p>
         <Groups />
-        <p className={styles.contentTitle}>Get Started</p>
+        {/* <p className={styles.contentTitle}>Get Started</p> */}
       </div>
     </Content>
   );

@@ -70,7 +70,7 @@ const Login = () => {
         <Space direction="vertical" size={[0, 48]} className={styles.spaceStyle}>
             <Layout>
                 <Layout>
-                    <Content className={styles.contentStyle}>
+                    <Content className={styles.contentStyle} data-testid="content">
                         <div className={styles.logo}>
                             <br/>
                         </div>
@@ -113,7 +113,7 @@ const Login = () => {
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
                                     <div className={styles.hint}>{message}</div>
-                                    <Button type="primary" htmlType="submit" className={styles.buttonStyle}>
+                                    <Button type="primary" htmlType="submit" className={styles.buttonStyle} data-testid="submit">
                                         Submit
                                     </Button>
                                     <Button htmlType="button" onClick={onReset} style={{ background: "white" }} className={styles.buttonStyle}>
