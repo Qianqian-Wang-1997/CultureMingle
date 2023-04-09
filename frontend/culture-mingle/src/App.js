@@ -12,6 +12,7 @@ import CreateEvent from "./components/CreateEvent"
 import Profile from "./components/Profile"
 import Groups from "./components/GroupList"
 import GroupDetail from "./components/GroupDetail"
+import About from "./components/About"
 
 
 const { Content, Footer } = Layout;
@@ -40,7 +41,8 @@ function App() {
                   <Route path='/groups/:groupId' element={<GroupDetail />} />
                   <Route exact path="/signup" element={<Registration />} />
                   <Route exact path="/createEvent" element={<CreateEvent />} />
-                  <Route exact path="/members/:userId" element={<Profile />} />
+                  <Route path="/members/:userId" element={<Profile />} />
+                  <Route path="/about" element={<About />} />
                 </Routes>
               </Content>
               <Footer className='footer'>Culture Mingle ©2023 Created in Waterloo</Footer>
