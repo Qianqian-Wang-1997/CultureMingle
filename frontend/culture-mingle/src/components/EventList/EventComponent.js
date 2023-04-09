@@ -20,7 +20,7 @@ function EventComponent({ event }) {
                         <div className={styles.eventAttendee}>{event.attendees.length} attendee{event.attendees.length > 1 && <>s</>} </div>
                     </Col>
                     <Col span={6} order={2}>
-                        <img className={styles.eventImage} src="https://secure-content.meetupstatic.com/images/classic-events/509689972/222x125.jpg" alt=" " loading="lazy" />
+                        {event.imageUrls && <img className={styles.eventImage} src={event.imageUrls} alt=" " loading="lazy" />}
                     </Col>
                 </Row>
             </div>

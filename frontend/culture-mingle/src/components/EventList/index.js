@@ -1,6 +1,5 @@
-import React, { useDispatch, useState, useEffect } from 'react';
+import React from 'react';
 import EventComponent from './EventComponent';
-import axios from 'axios';
 
 function EventList({ events }) {
     return (
