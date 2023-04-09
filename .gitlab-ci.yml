@@ -42,7 +42,7 @@ backend-test:
       - .gradle
 
 front-test:
-  image: node:latest
+  image: node:18.14.2
   stage: test
   before_script:
     - cd frontend/culture-mingle
