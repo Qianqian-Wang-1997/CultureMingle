@@ -25,7 +25,7 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.getGroupById(id));
     }
 
-    @PostMapping("/groups/")
+    @PostMapping("/groups")
     public ResponseEntity<Group> createGroup(@RequestBody Group group) {
         groupService.createGroup(group);
         groupService.organizeGroup(group.getOrganizer(), group.getId());
