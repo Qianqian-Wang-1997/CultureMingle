@@ -9,6 +9,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
 	}
 }
 
@@ -19,6 +20,8 @@ apply plugin: 'org.springframework.boot'
 // spring dependency management (handles loading correct versions
 // for spring dependencies)
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'jacoco'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -63,6 +66,24 @@ test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
+	}
+//	finalizedBy jacocoTestReport
+}
+
+jacoco {
+	toolVersion = '0.8.7'
+	reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+	dependsOn junitPlatform
+	reports {
+		xml.enabled true
+		csv.enabled true
+		html.enabled true
+		html.destination "${buildDir}/jacocoHtml"
+		xml.destination "${buildDir}/jacocoXml.xml"
+		csv.destination "${buildDir}/jacocoCsv.csv"
 	}
 }
 

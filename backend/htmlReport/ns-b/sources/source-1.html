@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EventServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ECE651.cultureMingle.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EventServiceImpl (com.ECE651.cultureMingle.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (1/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1.2%
+  </span>
+  <span class="absValue">
+    (1/80)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ECE651.cultureMingle.service;
+&nbsp;
+&nbsp;import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
+&nbsp;import com.ECE651.cultureMingle.model.Event;
+&nbsp;import com.ECE651.cultureMingle.model.Group;
+&nbsp;import com.ECE651.cultureMingle.model.User;
+&nbsp;import com.ECE651.cultureMingle.repository.EventRepository;
+&nbsp;
+&nbsp;import com.ECE651.cultureMingle.repository.GroupRepository;
+&nbsp;import com.ECE651.cultureMingle.repository.UserRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@Service
+&nbsp;@Transactional
+<b class="fc">&nbsp;public class EventServiceImpl implements EventService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private EventRepository eventRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private GroupRepository groupRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private UserRepository userRepository;
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public Event createEvent(Event event) { return eventRepository.save(event); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Event updateEvent(Event event) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(event.getId());</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Event eventUpdate = eventDb.get();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (event.getTitle() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setTitle(event.getTitle());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getDescription() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setDescription(event.getDescription());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getVenue() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setVenue(event.getVenue());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getHost() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setHost(event.getHost());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getTime() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setTime(event.getTime());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getImageUrls() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setImageUrls(event.getImageUrls());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getGroup() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setGroup(event.getGroup());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (event.getAttendees() != null) {</b>
+<b class="nc">&nbsp;                eventUpdate.setAttendees(event.getAttendees());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            eventRepository.save(eventUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            return eventUpdate;</b>
+&nbsp;
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + event.getId());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Event joinEvent(String userId, String eventId) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(eventId);</b>
+<b class="nc">&nbsp;        Optional&lt;User&gt; userDb = userRepository.findById(userId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent() &amp;&amp; userDb.isPresent()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Event eventUpdate = eventDb.get();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; attendees = eventUpdate.getAttendees();</b>
+<b class="nc">&nbsp;            attendees.add(userId);</b>
+<b class="nc">&nbsp;            eventUpdate.setAttendees(attendees);</b>
+<b class="nc">&nbsp;            eventRepository.save(eventUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            User userUpdate = userDb.get();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; eventHistory = userUpdate.getEventHistory();</b>
+<b class="nc">&nbsp;            eventHistory.add(eventId);</b>
+<b class="nc">&nbsp;            userUpdate.setEventHistory(eventHistory);</b>
+<b class="nc">&nbsp;            userRepository.save(userUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            return eventUpdate;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (!eventDb.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + eventId);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;User not found with id: &quot; + userId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Event hostEvent(String userId, String eventId) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(eventId);</b>
+<b class="nc">&nbsp;        Optional&lt;User&gt; userDb = userRepository.findById(userId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent() &amp;&amp; userDb.isPresent()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Event eventUpdate = eventDb.get();</b>
+<b class="nc">&nbsp;            eventUpdate.setHost(userId);</b>
+<b class="nc">&nbsp;            eventRepository.save(eventUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            User userUpdate = userDb.get();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; eventHistory = userUpdate.getEventHistory();</b>
+<b class="nc">&nbsp;            eventHistory.add(eventId);</b>
+<b class="nc">&nbsp;            userUpdate.setEventHistory(eventHistory);</b>
+<b class="nc">&nbsp;            userRepository.save(userUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            return eventUpdate;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (!eventDb.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + eventId);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;User not found with id: &quot; + userId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Event bindEvent(String groupId, String eventId) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(eventId);</b>
+<b class="nc">&nbsp;        Optional&lt;Group&gt; groupDb = groupRepository.findById(groupId);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent() &amp;&amp; groupDb.isPresent()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            Event eventUpdate = eventDb.get();</b>
+<b class="nc">&nbsp;            eventUpdate.setGroup(groupId);</b>
+<b class="nc">&nbsp;            eventRepository.save(eventUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            Group groupUpdate = groupDb.get();</b>
+<b class="nc">&nbsp;            Set&lt;String&gt; events = groupUpdate.getEvents();</b>
+<b class="nc">&nbsp;            events.add(eventId);</b>
+<b class="nc">&nbsp;            groupUpdate.setEvents(events);</b>
+<b class="nc">&nbsp;            groupRepository.save(groupUpdate);</b>
+&nbsp;
+<b class="nc">&nbsp;            return eventUpdate;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else if (!eventDb.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + eventId);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Group not found with id: &quot; + groupId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="nc">&nbsp;    public List&lt;Event&gt; getAllEvent() { return eventRepository.findAll(); }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Event getEventById(String id) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent()) {</b>
+<b class="nc">&nbsp;            return eventDb.get();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + id);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteEvent(String id) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Event&gt; eventDb = eventRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (eventDb.isPresent()) {</b>
+<b class="nc">&nbsp;            eventRepository.delete(eventDb.get());</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;Event not found with id: &quot; + id);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 13:25</div>
+</div>
+</body>
+</html>
