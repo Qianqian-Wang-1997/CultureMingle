@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './GroupComponent.module.css';
 import { Col, Row } from 'antd';
 import { NavLink } from 'react-router-dom';
