@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -30,7 +31,13 @@ public class EventServiceImpl implements EventService {
     private UserRepository userRepository;
 
     @Override
-    public Event createEvent(Event event) { return eventRepository.save(event); }
+    public Event createEvent(Event event) {
+
+        event.setAttendees(new HashSet<>());
+
+        return eventRepository.save(event);
+
+    }
 
     @Override
     public Event updateEvent(Event event) {
@@ -50,20 +57,11 @@ public class EventServiceImpl implements EventService {
             if (event.getVenue() != null) {
                 eventUpdate.setVenue(event.getVenue());
             }
-            if (event.getHost() != null) {
-                eventUpdate.setHost(event.getHost());
-            }
             if (event.getTime() != null) {
                 eventUpdate.setTime(event.getTime());
             }
             if (event.getImageUrls() != null) {
                 eventUpdate.setImageUrls(event.getImageUrls());
-            }
-            if (event.getGroup() != null) {
-                eventUpdate.setGroup(event.getGroup());
-            }
-            if (event.getAttendees() != null) {
-                eventUpdate.setAttendees(event.getAttendees());
             }
 
             eventRepository.save(eventUpdate);
@@ -179,7 +177,43 @@ public class EventServiceImpl implements EventService {
         Optional<Event> eventDb = eventRepository.findById(id);
 
         if (eventDb.isPresent()) {
+
+            Event event = eventDb.get();
+
+            String host = event.getHost();
+            Optional<User> userDb = userRepository.findById(host);
+            if (userDb.isPresent()) {
+                User userUpdate = userDb.get();
+                Set<String> eventHistory = userUpdate.getEventHistory();
+                eventHistory.remove(id);
+                userUpdate.setEventHistory(eventHistory);
+                userRepository.save(userUpdate);
+            }
+
+            String group = event.getGroup();
+            Optional<Group> groupDb = groupRepository.findById(group);
+            if (groupDb.isPresent()) {
+                Group groupUpdate = groupDb.get();
+                Set<String> events = groupUpdate.getEvents();
+                events.remove(id);
+                groupUpdate.setEvents(events);
+                groupRepository.save(groupUpdate);
+            }
+
+            Set<String> attendees = event.getAttendees();
+            for (String attendee : attendees) {
+                userDb = userRepository.findById(attendee);
+                if (userDb.isPresent()) {
+                    User userUpdate = userDb.get();
+                    Set<String> eventHistory = userUpdate.getEventHistory();
+                    eventHistory.remove(id);
+                    userUpdate.setEventHistory(eventHistory);
+                    userRepository.save(userUpdate);
+                }
+            }
+
             eventRepository.delete(eventDb.get());
+
         } else {
             throw new ResourceNotFoundException("Event not found with id: " + id);
         }

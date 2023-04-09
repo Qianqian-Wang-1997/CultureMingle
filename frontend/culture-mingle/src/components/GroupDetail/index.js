@@ -81,7 +81,7 @@ const GroupDetail = (props) => {
             <div className={styles.groupHomeHeader}>
                 <Row width="100%">
                     <Col span={10} order={1}>
-                        <img className={styles.groupImage} src={currentGroup.logoUrl} alt=" " loading="lazy" />
+                        {currentGroup.logoUrl && <img className={styles.groupImage} src={currentGroup.logoUrl} alt=" " loading="lazy" />}
                     </Col>
                     <Col span={12} order={2} className={styles.groupContent}>
                         <h1 className={styles.groupTitle}>
@@ -101,24 +101,20 @@ const GroupDetail = (props) => {
                 </Row>
             </div>
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
-            <div className={styles.content} >
-                {current == "about" && <div className={styles.about}> {currentGroup.description} </div>}
-                {current == "events" &&
-                    <div className={styles.events}>
-                        {events.length <= 0 ? <div className={styles.noContent}>No Event Right Now</div> :
-                            events.map(item => (
-                                <EventComponent key={item.id} event={item} />
-                            ))
-                        }
-                    </div>}
-                {current == "members" &&
-                    <div className={styles.members}>
-                        {currentGroup.members.length == 0 ?
-                            <div className={styles.noContent}>No Memeber Right Now</div> :
-                            <MemberList list={currentGroup.members} />}
-                    </div>}
-            </div>
-
+            {current == "about" ? <div className={styles.about}> {currentGroup.description} </div> : <></>}
+            {current == "events" ?
+                <div className={styles.events}>
+                    {events && events.map(item => (
+                        <EventComponent key={item.id} event={item} />
+                    ))}
+                    {!events ? <div className={styles.noContent}>No Event Right Now</div> : <></>}
+                </div> : <></>}
+            {current == "members" ?
+                <div className={styles.members}>
+                    {currentGroup.members.length === 0 ?
+                        <div className={styles.noContent}>No Memeber Right Now</div> :
+                        <MemberList hostId={currentGroup.organizer} attendeesId={currentGroup.members} />}
+                </div> : <></>}
             <Join joinId={groupId} type="groups"></Join>
 
         </div>
