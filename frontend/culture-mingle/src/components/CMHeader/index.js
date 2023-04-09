@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.css';
 import { NavLink } from 'react-router-dom';
 import { Layout, Col, Button, Row, Dropdown } from 'antd';
 import CreateGroup from '../CreateGroup';
-
 const { Header } = Layout;
 const items = [
   {
@@ -19,7 +18,7 @@ const items = [
 
 const CMHeader = () => {
   let userId = localStorage.getItem("userId");
-  const handleLogout=(e)=>{
+  const handleLogout = (e) => {
     localStorage.clear();
     console.log("click logout");
     window.location.reload();
@@ -34,10 +33,10 @@ const CMHeader = () => {
   return (
     <Header theme='light' className={styles.header}>
       <Row>
-        {userId==null ?
+        {userId == null ?
           <>
             <Col span={21} order={1} className={styles.headerLogo}>
-              <NavLink to='/' style={{ color: 'black', marginLeft:'10%' }}>
+              <NavLink to='/' style={{ color: 'black', marginLeft: '10%' }}>
                 Culture Mingle
               </NavLink>
             </Col>
@@ -53,25 +52,23 @@ const CMHeader = () => {
             </Col></> :
           <>
             <Col span={17} order={1} className={styles.headerLogo}>
-              <NavLink to='/' style={{ color: 'black' , marginLeft:'35%'}}>
+              <NavLink to='/' style={{ color: 'black', marginLeft: '35%' }}>
                 Culture Mingle
               </NavLink>
             </Col>
             <Col span={4} order={2}>
-              <Button type="link" className={styles.group} onClick={() => {setOpen(true);}}>
+              <Button type="link" className={styles.group} onClick={() => { setOpen(true); }}>
                 Start a New Group
               </Button>
-              <CreateGroup open={open} onCreate={onCreate} onCancel={() => {setOpen(false);}} />
+              <CreateGroup open={open} onCreate={onCreate} onCancel={() => { setOpen(false); }} />
             </Col>
             <Col span={2} order={3}>
               <NavLink to={`/members/${userId}`}>
-                <Dropdown menu={{ items }} placement="bottomLeft">
-                  <Button className={styles.headerButton} type="primary">my profile</Button>
-                </Dropdown>
+                <Button className={styles.headerButton} type="primary">my profile</Button>
               </NavLink>
             </Col>
             <Col span={1} order={4}>
-              <NavLink onClick={event=>handleLogout(event)} to={`/`} >
+              <NavLink onClick={event => handleLogout(event)} to={`/`} >
                 <Button className={styles.headerButton}>Log out</Button>
               </NavLink>
             </Col>

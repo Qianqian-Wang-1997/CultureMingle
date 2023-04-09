@@ -1,8 +1,10 @@
 package com.ECE651.cultureMingle.service;
 
 import com.ECE651.cultureMingle.exception.ResourceNotFoundException;
+import com.ECE651.cultureMingle.model.Event;
 import com.ECE651.cultureMingle.model.Group;
 import com.ECE651.cultureMingle.model.User;
+import com.ECE651.cultureMingle.repository.EventRepository;
 import com.ECE651.cultureMingle.repository.GroupRepository;
 
 import com.ECE651.cultureMingle.repository.UserRepository;
@@ -17,6 +19,9 @@ import java.util.Set;
 @Service
 @Transactional
 public class GroupServiceImpl implements GroupService {
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Autowired
     private GroupRepository groupRepository;
@@ -45,17 +50,8 @@ public class GroupServiceImpl implements GroupService {
             if (group.getLocation() != null) {
                 groupUpdate.setLocation(group.getLocation());
             }
-            if (group.getOrganizer() != null) {
-                groupUpdate.setOrganizer(group.getOrganizer());
-            }
             if (group.getLogoUrl() != null) {
                 groupUpdate.setLogoUrl(group.getLogoUrl());
-            }
-            if (group.getMembers() != null) {
-                groupUpdate.setMembers(group.getMembers());
-            }
-            if (group.getEvents() != null) {
-                groupUpdate.setEvents(group.getEvents());
             }
 
             groupRepository.save(groupUpdate);
@@ -144,7 +140,43 @@ public class GroupServiceImpl implements GroupService {
         Optional<Group> groupDb = groupRepository.findById(id);
 
         if (groupDb.isPresent()) {
+
+            Group group = groupDb.get();
+
+            String organizer = group.getOrganizer();
+            Optional<User> userDb = userRepository.findById(organizer);
+            if (userDb.isPresent()) {
+                User userUpdate = userDb.get();
+                Set<String> groups = userUpdate.getGroups();
+                groups.remove(id);
+                userUpdate.setGroups(groups);
+                userRepository.save(userUpdate);
+            }
+
+            Set<String> members = group.getMembers();
+            for (String member : members) {
+                userDb = userRepository.findById(member);
+                if (userDb.isPresent()) {
+                    User userUpdate = userDb.get();
+                    Set<String> groups = userUpdate.getGroups();
+                    groups.remove(id);
+                    userUpdate.setGroups(groups);
+                    userRepository.save(userUpdate);
+                }
+            }
+
+            Set<String> events = group.getEvents();
+            for (String event : events) {
+                Optional<Event> eventDb = eventRepository.findById(event);
+                if (eventDb.isPresent()) {
+                    Event eventUpdate = eventDb.get();
+                    eventUpdate.setGroup(null);
+                    eventRepository.save(eventUpdate);
+                }
+            }
+
             groupRepository.delete(groupDb.get());
+
         } else {
             throw new ResourceNotFoundException("Group not found with id: " + id);
         }

@@ -7,4 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CultureMingleWebApplication {
 
     public static void main(String[] args) { SpringApplication.run(CultureMingleWebApplication.class, args); }
+
 }
