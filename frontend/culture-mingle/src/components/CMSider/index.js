@@ -29,10 +29,11 @@ const CMSider = () => {
   const [collapsed, setCollapsed] = useState(true);
   const userLoginStatus = localStorage.getItem("userId");
   const items = [
-    getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
-    getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
-    userLoginStatus && getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <ScheduleOutlined />),
-    userLoginStatus && getItem(<NavLink to="/createGroup" >Create an Group</NavLink>, '4', <PicRightOutlined />)
+    getItem(<NavLink to="/" >Discover</NavLink>, '1', <SearchOutlined />,),
+    userLoginStatus && getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '2', <ScheduleOutlined />),
+    userLoginStatus && getItem(<NavLink to="/createGroup" >Create an Group</NavLink>, '3', <PicRightOutlined />),
+    getItem(<NavLink to="/about" >About</NavLink>, '4', <SmileOutlined />,),
+
   ];
   return (
     <div className={styles.sider}>

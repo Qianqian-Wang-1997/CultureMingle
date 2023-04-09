@@ -19,7 +19,7 @@ const Join = ({joinId, type}) => {
         setLoading(true);
         try {
             axios.put(
-                `/${type}/join/${userId}&${joinId}`,
+                `http://localhost:8080/${type}/join/${userId}&${joinId}`,
             ).then(
                 res => {
                     console.log(res);
