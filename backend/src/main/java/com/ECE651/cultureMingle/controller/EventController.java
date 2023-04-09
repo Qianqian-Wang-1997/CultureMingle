@@ -29,7 +29,7 @@ public class EventController {
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         eventService.createEvent(event);
         eventService.hostEvent(event.getHost(), event.getId());
-        if (event.getGroup() != null) {
+        if (!event.getGroup().isEmpty()) {
             eventService.bindEvent(event.getGroup(), event.getId());
         }
         return ResponseEntity.ok().body(event);
