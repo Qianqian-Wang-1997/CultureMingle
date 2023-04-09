@@ -101,20 +101,23 @@ const GroupDetail = (props) => {
                 </Row>
             </div>
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+            <div className={styles.content}>
             {current == "about" ? <div className={styles.about}> {currentGroup.description} </div> : <></>}
             {current == "events" ?
                 <div className={styles.events}>
                     {events && events.map(item => (
                         <EventComponent key={item.id} event={item} />
                     ))}
-                    {!events ? <div className={styles.noContent}>No Event Right Now</div> : <></>}
+                    {events && events.length == 0 && <div className={styles.noContent}>No Event Right Now</div>}
                 </div> : <></>}
             {current == "members" ?
-                <div className={styles.members}>
+                <div>
                     {currentGroup.members.length === 0 ?
                         <div className={styles.noContent}>No Memeber Right Now</div> :
                         <MemberList hostId={currentGroup.organizer} attendeesId={currentGroup.members} />}
                 </div> : <></>}
+            </div>
+
             <Join joinId={groupId} type="groups"></Join>
 
         </div>
