@@ -17,6 +17,8 @@ const EventDetail = (props) => {
     const [data, setData] = useState([]);
     const [description, setDescription] = useState([]);
     const [groupName, setGroupName] = useState("");
+    const [attendees, setAttendees] = useState([]);
+    const [host, setHost] = useState({});
     useEffect(() => {
         axios.get(`/events/${eventId}`).then((response) => {
             setData(response.data);
@@ -30,6 +32,39 @@ const EventDetail = (props) => {
                 });
             } else {
                 setGroupName("This event does not have a group");
+            }
+            // Get host
+            axios.get(`/users/${response.data.host}`).then((hostResponse) => {
+                const hostInfo = { 
+                    avatar: "https://joesch.moe/api/v1/random?key=1", 
+                    name: hostResponse.data.username, 
+                    identity: "Host" 
+                };
+                console.log(hostInfo);
+                setHost(hostInfo);
+                //console.log(hostInfo);
+            }).catch((error) => {
+                console.log(error);
+            });
+            // Get attendees
+            const attendeeids = response.data.attendees;
+            var attendeesArr =[];
+            var i = 2;
+            if(attendeeids != null) {             
+                Promise.all(attendeeids.map(attendeeid => axios.get(`/users/${attendeeid}`))).then((responses) => {
+                    responses.forEach((attResponse) => {
+                        const attendee = { 
+                            avatar: `https://joesch.moe/api/v1/random?key=${i++}`, 
+                            name: attResponse.data.username, 
+                            identity: "Attendee" 
+                        };
+                        attendeesArr.push(attendee);
+                    });
+                    attendeesArr.push(host);
+                    setAttendees([...attendeesArr]);
+                });
+            } else {
+                setAttendees([host]);
             }
         }).catch((error) => {
             console.log(error);
@@ -48,13 +83,13 @@ const EventDetail = (props) => {
     }
 
     // Set attendees list
-    const attendees = [
-        { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
-        { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=3", name: "Aosen", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
-    ];
+    // const attendees = [
+    //     { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=3", name: "Aosen", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
+    // ];
 
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
