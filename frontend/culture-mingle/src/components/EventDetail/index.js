@@ -13,32 +13,47 @@ const { Sider, Content } = Layout;
 const EventDetail = (props) => {
     const { eventId } = useParams();
 
-    // Get event details data from the BackEnd
     const [data, setData] = useState([]);
     const [description, setDescription] = useState([]);
     const [groupName, setGroupName] = useState("");
-    useEffect(() => {
-        axios.get(`/events/${eventId}`).then((response) => {
+
+    const fetchEventData = async (eventId) => {
+        try {
+            const response = await axios.get(`/events/${eventId}`);
             setData(response.data);
             setDescription(response.data.description);
-            // Get group name from group id
-            if(response.data.group != "") {
-                axios.get(`/groups/${response.data.group}`).then((groupResponse) => {
-                    setGroupName(groupResponse.data.groupName);
-                }).catch((error) => {
-                    console.log(error);
-                });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchGroupName = async (groupId) => {
+        try {
+            if (groupId !== "") {
+                const groupResponse = await axios.get(`/groups/${groupId}`);
+                setGroupName(groupResponse.data.groupName);
             } else {
                 setGroupName("This event does not have a group");
             }
-        }).catch((error) => {
+        } catch (error) {
             console.log(error);
-        });
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const eventData = await fetchEventData(eventId);
+            await fetchGroupName(eventData.group);
+        };
+        fetchData();
     }, []);
+
+
 
     // Set description as paragraphs
     var paralists;
-    if(description.includes("\n")) {
+    if (description.includes("\n")) {
         const paras = description.split('\n');
         paralists = paras.map(
             (para) => (<p>{para}</p>)
@@ -48,18 +63,18 @@ const EventDetail = (props) => {
     }
 
     // Set attendees list
-    const attendees = [
-        { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
-        { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=3", name: "Aosen", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member" },
-        { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
-    ];
+    // const attendees = [
+    //     { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=3", name: "Aosen", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member" },
+    //     { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
+    // ];
 
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
 
-            <Layout style={{paddingBottom: '64px'}}>
+            <Layout style={{ paddingBottom: '64px' }}>
                 <div className={styles.headerStyle} data-testid="1">
                     <div className={styles.time}>
                         {normalizeDate(data.time)}
@@ -77,7 +92,7 @@ const EventDetail = (props) => {
                         </div>
                         <div className={styles.subtitles}>Attendees</div>
                         <div className={styles.anttendees}>
-                            <MemberList list={attendees}></MemberList>
+                            <MemberList hostId={data.host} attendeesId={data.attendees}></MemberList>
                         </div>
                     </Content>
 
