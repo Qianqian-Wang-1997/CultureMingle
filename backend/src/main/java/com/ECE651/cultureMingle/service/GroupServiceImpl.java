@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -30,7 +31,14 @@ public class GroupServiceImpl implements GroupService {
     private UserRepository userRepository;
 
     @Override
-    public Group createGroup(Group group) { return groupRepository.save(group); }
+    public Group createGroup(Group group) {
+
+        group.setEvents(new HashSet<>());
+        group.setMembers(new HashSet<>());
+        
+        return groupRepository.save(group);
+
+    }
 
     @Override
     public Group updateGroup(Group group) {
