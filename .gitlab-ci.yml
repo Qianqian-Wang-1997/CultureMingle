@@ -29,9 +29,6 @@ build:
       - build
       - .gradle
 
-stages:
-  - test
-
 backend-test:
   stage: test
   script: 
