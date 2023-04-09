@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useDispatch, useState, useEffect } from 'react';
 import EventComponent from './EventComponent';
 import axios from 'axios';
 
-function EventList({ eventList }) {
-    const [data, setData] = useState([]);
-    const getData = async () => {
-      const { data } = await axios.get("/events");
-      setData(data);
-    };
-    useEffect(() => {
-      getData();
-    }, []);
-
+function EventList({ events }) {
     return (
         <div>
-            {data && data.map(item => (
+            {events && events.map(item => (
                 <EventComponent key={item.id} event={item} />
             ))}
         </div>
