@@ -36,7 +36,7 @@ public class UserControllerTest {
     private User user;
 
     @BeforeEach
-    void initMocks() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
         user = new User();
         user.setId("testid");

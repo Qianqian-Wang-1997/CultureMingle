@@ -29,7 +29,7 @@ build:
       - build
       - .gradle
 
-test:
+backend-test:
   stage: test
   script: 
     - cd backend
@@ -40,6 +40,23 @@ test:
     paths:
       - build
       - .gradle
+
+front-test:
+  image: node:18.14.2
+  stage: test
+  before_script:
+    - cd frontend/culture-mingle
+    - npm install
+  script:
+    - npm run test:ci
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    paths:
+      - frontend/culture-mingle/coverage/
+    when: always
+    reports:
+      junit:
+        - frontend/culture-mingle/junit.xml
 
 deploy:
   stage: deploy
