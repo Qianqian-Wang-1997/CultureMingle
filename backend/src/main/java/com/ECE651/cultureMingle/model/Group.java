@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Group {
 
     private String location;
 
+    @NotBlank
     private String organizer;
 
     private String logoUrl;
