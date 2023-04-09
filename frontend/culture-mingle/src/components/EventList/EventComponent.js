@@ -20,7 +20,7 @@ function EventComponent({ event }) {
                         <div className={styles.eventAttendee}>{event.attendees.length} attendee{event.attendees.length > 1 && <>s</>} </div>
                     </Col>
                     <Col span={6} order={2}>
-                        {event.imageUrls[0] && <img className={styles.eventImage} src={event.imageUrls[0]} alt=" " loading="lazy" />}
+                        {event.imageUrls && event.imageUrls[0] && <img className={styles.eventImage} src={event.imageUrls[0]} alt=" " loading="lazy" />}
                     </Col>
                 </Row>
             </div>
