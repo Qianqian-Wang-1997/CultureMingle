@@ -80,7 +80,7 @@ const GroupDetail = (props) => {
             <div className={styles.groupHomeHeader}>
                 <Row width="100%">
                     <Col span={10} order={1}>
-                        <img className={styles.groupImage} src={currentGroup.logoUrl} alt=" " loading="lazy" />
+                        {currentGroup.logoUrl && <img className={styles.groupImage} src={currentGroup.logoUrl} alt=" " loading="lazy" />}
                     </Col>
                     <Col span={12} order={2} className={styles.groupContent}>
                         <div className={styles.groupTitle}>
@@ -110,10 +110,11 @@ const GroupDetail = (props) => {
                 </div> : <></>}
             {current == "members" ?
                 <div className={styles.members}>
-                    {currentGroup.attendees.length == 0 ? <div className={styles.noContent}>No Memeber Right Now</div> :
-                        <MemberList list={currentGroup.attendees} />}
+                    {currentGroup.members.length === 0 ?
+                        <div className={styles.noContent}>No Memeber Right Now</div> :
+                        <MemberList hostId={currentGroup.organizer} attendeesId={currentGroup.members} />}
                 </div> : <></>}
-                <Join joinId={groupId} type="groups"></Join>
+            <Join joinId={groupId} type="groups"></Join>
 
         </div>
     )

@@ -16,8 +16,6 @@ const EventDetail = (props) => {
     const [data, setData] = useState([]);
     const [description, setDescription] = useState([]);
     const [groupName, setGroupName] = useState("");
-    const [attendees, setAttendees] = useState([]);
-    const [host, setHost] = useState({});
 
     const fetchEventData = async (eventId) => {
         try {
@@ -43,58 +41,10 @@ const EventDetail = (props) => {
         }
     };
 
-    const fetchHostData = async (hostId) => {
-        try {
-            const hostResponse = await axios.get(`/users/${hostId}`);
-            const hostInfo = {
-                avatar: "https://joesch.moe/api/v1/random?key=1",
-                name: hostResponse.data.username,
-                identity: "Host"
-            };
-            setHost(hostInfo);
-            return hostInfo;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const fetchAttendeesData = async (attendeeIds) => {
-        try {
-            let attendeesArr = [];
-            let i = 2;
-            if (attendeeIds !== null) {
-                const responses = await Promise.all(attendeeIds.map(attendeeId => axios.get(`/users/${attendeeId}`)));
-                responses.forEach((attResponse) => {
-                    const attendee = {
-                        avatar: `https://joesch.moe/api/v1/random?key=${i++}`,
-                        name: attResponse.data.username,
-                        identity: "Attendee"
-                    };
-                    attendeesArr.push(attendee);
-                });
-            } else {
-                const hostInfo = {
-                    avatar: "https://joesch.moe/api/v1/random?key=1",
-                    name: host.data.username,
-                    identity: "Host"
-                };
-                attendeesArr.push(hostInfo);
-            }
-            return attendeesArr;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     useEffect(() => {
         const fetchData = async () => {
             const eventData = await fetchEventData(eventId);
-            if (eventData) {
-                await fetchGroupName(eventData.group);
-                const hostInfo = await fetchHostData(eventData.host);
-                const attendeesArr = await fetchAttendeesData(eventData.attendees);
-                setAttendees([hostInfo, ...attendeesArr]);
-            }
+            await fetchGroupName(eventData.group);
         };
         fetchData();
     }, []);
@@ -142,7 +92,7 @@ const EventDetail = (props) => {
                         </div>
                         <div className={styles.subtitles}>Attendees</div>
                         <div className={styles.anttendees}>
-                            <MemberList list={attendees}></MemberList>
+                            <MemberList hostId={data.host} attendeesId={data.attendees}></MemberList>
                         </div>
                     </Content>
 

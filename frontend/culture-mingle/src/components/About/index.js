@@ -30,7 +30,7 @@ const GroupIntroduction = () => {
         },
         {
             name: 'Yuren Qin',
-            role: 'Backend Developer',
+            role: 'Backend Developer, 中央數據庫改革領導小組組長',
             avatar: avatar5
         }
     ];
