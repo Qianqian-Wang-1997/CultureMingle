@@ -55,7 +55,7 @@ const Login = () => {
                 }
             ).catch((error)=>{
                 console.log(error.response.data.message);
-                setMessage(error.response.data.message);
+                setMessage("Invalid account or password!");
             })
         } catch (err) {
             console.log(err);

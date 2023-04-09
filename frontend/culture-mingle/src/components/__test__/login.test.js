@@ -40,7 +40,7 @@ describe('login test', () => {
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'test' } });
             fireEvent.click(screen.getByTestId('submit'));
         });
-        await waitFor(() => expect(screen.getByText('Invalid credentials')).toBeInTheDocument());
+        await waitFor(() => expect(screen.getByText('Invalid account or password!')).toBeInTheDocument());
       });
 
       it('should render error message on failed login', async () => {
