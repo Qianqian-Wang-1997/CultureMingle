@@ -1,10 +1,21 @@
 import { Form, Input, Modal, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import { useState } from 'react';
 
 const { TextArea } = Input;
 
 const CreateGroup = ({ open, onCreate, onCancel }) => {
     const [form] = Form.useForm();
+    const [name, setName] = useState("");
+    const [location, setLocation] = useState("");
+    const [des, setDes] = useState("");
+    const groupform = {
+        groupName: name,
+        location: location,
+        description: des,
+        organizer: localStorage.getItem("userId")
+    }
 
     const normFile = (e) => {
         console.log('Upload event:', e);
@@ -23,6 +34,11 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
             onCancel={onCancel}
             onOk={() => {
                 form.validateFields().then((values) => {
+                    axios.post(
+                        'http://localhost:8080/groups',
+                        groupform,
+                    )
+                    console.log(groupform)
                     form.resetFields();
                     onCreate(values);
                 })
@@ -36,13 +52,14 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
 
             <Form form={form} layout="vertical" name="form_in_modal">
         
-                <Form.Item name="title" label={<label style={{ fontSize: "16px" }}>Title</label>} style={{marginTop:"30px"}}
+                <Form.Item name="groupName" label={<label style={{ fontSize: "16px" }}>Name</label>} style={{marginTop:"30px"}}
                     rules={[
                         {
                             required: true,
                             message: 'Please input the title of your group!',
                         },
                     ]}
+                    onChange={(e) => setName(e.target.value)}
                 >
                     <Input />
                 </Form.Item>
@@ -54,6 +71,7 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
                             message: 'Please input the location of your group!',
                         },
                     ]}
+                    onChange={(e) => setLocation(e.target.value)}
                 >
                     <Input />
                 </Form.Item>
@@ -65,6 +83,7 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
                             message: 'Please input the description of your group!',
                         },
                     ]}
+                    onChange={(e) => setDes(e.target.value)}
                 >
                     <TextArea rows={3} />
                 </Form.Item>
