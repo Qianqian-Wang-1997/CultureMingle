@@ -13,7 +13,7 @@ function GroupComponent({ group }) {
                         <div className={styles.groupName}>{group.groupName}</div>
                         <div className={styles.groupDesc}>{group.description}</div>
                         <div className={styles.groupLocation}><HeatMapOutlined />{group.location}</div>
-                        <div className={styles.groupAttendee}>{group.members.length} member{group.members.length >=1 && <>s</> }</div>
+                        <div className={styles.groupAttendee}>{group.members.length} member{group.members.length >1 && <>s</> }</div>
                     </Col>
                     <Col span={6} order={2}>
                     {group.logoUrl && <img className={styles.groupImage} src={group.logoUrl} alt=" " loading="lazy" />}
