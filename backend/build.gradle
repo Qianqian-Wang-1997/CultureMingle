@@ -20,7 +20,6 @@ apply plugin: 'org.springframework.boot'
 // for spring dependencies)
 apply plugin: 'io.spring.dependency-management'
 
-// group = 'com.okta.springbootwithauth'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -29,10 +28,6 @@ repositories {
 }
 
 dependencies {
-	// okta's helpful spring boot starter
-	// compile('com.okta.spring:okta-spring-boot-starter:0.6.0')
-	// spring boot security
-	// compile('org.springframework.boot:spring-boot-starter-security')
 	// spring boot web server
 	compile('org.springframework.boot:spring-boot-starter-web')
 	// thymeleaf templating support for spring boot
@@ -53,6 +48,22 @@ dependencies {
 	// for spring boot testing
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
+
+	// JUnit 5
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+	testImplementation 'net.bytebuddy:byte-buddy:1.11.22'
+
+	// Mockito
+	testImplementation 'org.mockito:mockito-core:3.12.4'
+	testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 /*

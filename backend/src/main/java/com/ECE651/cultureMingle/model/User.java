@@ -2,6 +2,7 @@ package com.ECE651.cultureMingle.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -35,6 +36,8 @@ public class User {
 
     @DBRef
     private Set<Role> roles = new HashSet<>();
+
+    public User(){};
 
     public User(String username, String email, String password) {
         this.username = username;
