@@ -47,6 +47,7 @@ const GroupDetail = (props) => {
             // Get event ids
             setEvents(response.data.events)
             setData(response.data);
+            console.log("test data: ", response.data)
         } catch (error) {
             console.error('Error fetching group data:', error);
         }
@@ -66,7 +67,7 @@ const GroupDetail = (props) => {
                 });
                 const eventData = await Promise.all(eventRequests);
                 // Do something with eventData, which is an array of responses from all the axios requests
-                // console.log("events", eventData);
+                console.log("events", eventData);
             } catch (error) {
                 console.error('Error fetching event data:', error);
             }
@@ -83,37 +84,42 @@ const GroupDetail = (props) => {
                         <img className={styles.groupImage} src={currentGroup.logoUrl} alt=" " loading="lazy" />
                     </Col>
                     <Col span={12} order={2} className={styles.groupContent}>
-                        <div className={styles.groupTitle}>
+                        <h1 className={styles.groupTitle}>
                             {currentGroup.groupName}
-                        </div>
-                        <div className={styles.groupDesc}>
+                        </h1>
+                        <p className={styles.groupDesc}>
                             <AimOutlined className={styles.icon} />
                             {currentGroup.location}
-                        </div>
-                        <div className={styles.groupDesc}>
+                        </p>
+                        <p className={styles.groupDesc}>
                             {currentGroup.organizer ?
                                 <div><UserOutlined className={styles.icon} />Host by {host}</div> :
-                                <div>no host right now
-                                </div>}
-                        </div>
+                                <p>no host right now
+                                </p>}
+                        </p>
                     </Col>
                 </Row>
             </div>
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
-            {current == "about" ? <div className={styles.about}> {currentGroup.description} </div> : <></>}
-            {current == "events" ?
-                <div className={styles.events}>
-                    {events && events.map(item => (
-                        <EventComponent key={item.id} event={item} />
-                    ))}
-                    {!events ? <div className={styles.noContent}>No Event Right Now</div> : <></>}
-                </div> : <></>}
-            {current == "members" ?
-                <div className={styles.members}>
-                    {currentGroup.attendees.length == 0 ? <div className={styles.noContent}>No Memeber Right Now</div> :
-                        <MemberList list={currentGroup.attendees} />}
-                </div> : <></>}
-                <Join joinId={groupId} type="groups"></Join>
+            <div className={styles.content} >
+                {current == "about" && <div className={styles.about}> {currentGroup.description} </div>}
+                {current == "events" &&
+                    <div className={styles.events}>
+                        {events.length <= 0 ? <div className={styles.noContent}>No Event Right Now</div> :
+                            events.map(item => (
+                                <EventComponent key={item.id} event={item} />
+                            ))
+                        }
+                    </div>}
+                {current == "members" &&
+                    <div className={styles.members}>
+                        {currentGroup.members.length == 0 ?
+                            <div className={styles.noContent}>No Memeber Right Now</div> :
+                            <MemberList list={currentGroup.members} />}
+                    </div>}
+            </div>
+
+            <Join joinId={groupId} type="groups"></Join>
 
         </div>
     )
