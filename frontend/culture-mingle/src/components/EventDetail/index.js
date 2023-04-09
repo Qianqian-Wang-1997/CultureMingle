@@ -18,60 +18,92 @@ const EventDetail = (props) => {
     const [groupName, setGroupName] = useState("");
     const [attendees, setAttendees] = useState([]);
     const [host, setHost] = useState({});
-    
+
+    const fetchEventData = async (eventId) => {
+        try {
+            const response = await axios.get(`/events/${eventId}`);
+            setData(response.data);
+            setDescription(response.data.description);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchGroupName = async (groupId) => {
+        try {
+            if (groupId !== "") {
+                const groupResponse = await axios.get(`/groups/${groupId}`);
+                setGroupName(groupResponse.data.groupName);
+            } else {
+                setGroupName("This event does not have a group");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchHostData = async (hostId) => {
+        try {
+            const hostResponse = await axios.get(`/users/${hostId}`);
+            const hostInfo = {
+                avatar: "https://joesch.moe/api/v1/random?key=1",
+                name: hostResponse.data.username,
+                identity: "Host"
+            };
+            setHost(hostInfo);
+            return hostInfo;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchAttendeesData = async (attendeeIds) => {
+        try {
+            let attendeesArr = [];
+            let i = 2;
+            if (attendeeIds !== null) {
+                const responses = await Promise.all(attendeeIds.map(attendeeId => axios.get(`/users/${attendeeId}`)));
+                responses.forEach((attResponse) => {
+                    const attendee = {
+                        avatar: `https://joesch.moe/api/v1/random?key=${i++}`,
+                        name: attResponse.data.username,
+                        identity: "Attendee"
+                    };
+                    attendeesArr.push(attendee);
+                });
+            } else {
+                const hostInfo = {
+                    avatar: "https://joesch.moe/api/v1/random?key=1",
+                    name: host.data.username,
+                    identity: "Host"
+                };
+                attendeesArr.push(hostInfo);
+            }
+            return attendeesArr;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.get(`/events/${eventId}`);
-                setData(response.data);
-                setDescription(response.data.description);
-                
-                // Get group name from group id
-                if(response.data.group !== "") {
-                    const groupResponse = await axios.get(`/groups/${response.data.group}`);
-                    setGroupName(groupResponse.data.groupName);
-                } else {
-                    setGroupName("This event does not have a group");
-                }
-                
-                // Get host
-                const hostResponse = await axios.get(`/users/${response.data.host}`);
-                const hostInfo = { 
-                    avatar: "https://joesch.moe/api/v1/random?key=1", 
-                    name: hostResponse.data.username, 
-                    identity: "Host" 
-                };
-                setHost(hostInfo);
-                const attendeesArr = [hostInfo];
-                
-                // Get attendees
-                const attendeeIds = response.data.attendees;
-                let i = 2;
-                if(attendeeIds != null) { 
-                    const responses = await Promise.all(attendeeIds.map(attendeeId => axios.get(`/users/${attendeeId}`)));
-                    responses.forEach((attResponse) => {
-                        const attendee = { 
-                            avatar: `https://joesch.moe/api/v1/random?key=${i++}`, 
-                            name: attResponse.data.username, 
-                            identity: "Attendee" 
-                        };
-                        attendeesArr.push(attendee);
-                    });
-                    setAttendees(attendeesArr);
-                } else {
-                    setAttendees([hostInfo]);
-                }
-            } catch (error) {
-                console.log(error);
+            const eventData = await fetchEventData(eventId);
+            if (eventData) {
+                await fetchGroupName(eventData.group);
+                const hostInfo = await fetchHostData(eventData.host);
+                const attendeesArr = await fetchAttendeesData(eventData.attendees);
+                setAttendees([hostInfo, ...attendeesArr]);
             }
         };
         fetchData();
     }, []);
-    
+
+
 
     // Set description as paragraphs
     var paralists;
-    if(description.includes("\n")) {
+    if (description.includes("\n")) {
         const paras = description.split('\n');
         paralists = paras.map(
             (para) => (<p>{para}</p>)
@@ -92,7 +124,7 @@ const EventDetail = (props) => {
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
 
-            <Layout style={{paddingBottom: '64px'}}>
+            <Layout style={{ paddingBottom: '64px' }}>
                 <div className={styles.headerStyle} data-testid="1">
                     <div className={styles.time}>
                         {normalizeDate(data.time)}
