@@ -21,19 +21,19 @@ function getItem(label, key, icon, children) {
     label
   };
 }
-const userId = "382472338"
-const items = [
-  getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
-  getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
 
-  getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <ScheduleOutlined />),
-  getItem(<NavLink to="/createGroup" >Create an Group</NavLink>, '4', <PicRightOutlined />)
-];
+
 const { Sider } = Layout;
 
-const CMSider = (props) => {
+const CMSider = () => {
   const [collapsed, setCollapsed] = useState(true);
-
+  const userLoginStatus = localStorage.getItem("userId");
+  const items = [
+    getItem(<NavLink to="/" >Discover Events</NavLink>, '1', <SearchOutlined />,),
+    getItem(<NavLink to="/groups" >More Groups</NavLink>, '2', <SmileOutlined />,),
+    userLoginStatus && getItem(<NavLink to="/createEvent" >Create an Event</NavLink>, '3', <ScheduleOutlined />),
+    userLoginStatus && getItem(<NavLink to="/createGroup" >Create an Group</NavLink>, '4', <PicRightOutlined />)
+  ];
   return (
     <div className={styles.sider}>
       <Sider theme='light' collapsible
