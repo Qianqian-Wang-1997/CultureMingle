@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 
 import EventComponent from '../EventList/EventComponent';
+import MemberList from '../MemberList';
 
 const items = [
     {
@@ -118,7 +119,8 @@ const GroupDetail = (props) => {
                 </div> : <></>}
             {current == "members" ? 
             <div className={styles.members}> 
-            {currentGroup.attendees.length==0 ? <div className={styles.noContent}>No Memeber Right Now</div> : <></>} 
+            {currentGroup.attendees.length==0 ? <div className={styles.noContent}>No Memeber Right Now</div> : 
+            <MemberList list={currentGroup.attendees} />} 
             </div> : <></>}
 
         </div>
