@@ -55,7 +55,7 @@ const MemberList = ({ hostId, attendeesId }) => {
     useEffect(() => {
         const fetchData = async () => {
             const hostInfo = await fetchHostData(hostId);
-            const attendeesArr = await fetchAttendeesData(attendeesId);
+            const attendeesArr = await fetchAttendeesData(attendeesId) || [];
             setAttendees([hostInfo, ...attendeesArr]);
         };
         fetchData();

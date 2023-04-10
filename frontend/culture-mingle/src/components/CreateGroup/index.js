@@ -14,16 +14,17 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
         groupName: name,
         location: location,
         description: des,
-        organizer: localStorage.getItem("userId")
+        organizer: localStorage.getItem("userId"),
+        logoUrl:"https://secure.meetupstatic.com/photos/event/1/0/c/f/clean_510184303.webp?w=640"
     }
 
-    const normFile = (e) => {
-        console.log('Upload event:', e);
-        if (Array.isArray(e)) {
-          return e;
-        }
-        return e?.fileList;
-    };
+    // const normFile = (e) => {
+    //     console.log('Upload event:', e);
+    //     if (Array.isArray(e)) {
+    //       return e;
+    //     }
+    //     return e?.fileList;
+    // };
 
     return (
         <Modal
@@ -89,7 +90,7 @@ const CreateGroup = ({ open, onCreate, onCancel }) => {
                 </Form.Item>
 
                 <Form.Item label={<label style={{ fontSize: "16px" }}>Photo</label>}>
-                    <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
+                    <Form.Item name="dragger" valuePropName="fileList" noStyle>
                         <Upload.Dragger name="files" action="/upload.do">
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined />
