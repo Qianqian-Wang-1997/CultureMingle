@@ -13,8 +13,9 @@ class GroupRepositoryTest {
     @BeforeEach
     void setUp() {
     }
-    @Test
-    void testFindById() {
-        System.out.println("ok");
-    }
+
+  @Test
+  void testFindById() {
+    System.out.println("ok");
+  }
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 
-
 @SpringBootTest
 @AutoConfigureDataMongo
 class EventRepositoryTest {
