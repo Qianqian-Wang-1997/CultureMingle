@@ -17,7 +17,12 @@ function EventComponent({ event }) {
                         <div className={styles.eventName}>{event.title}</div>
                         {/* <div className={styles.eventGroup}>{event.group.groupName}</div> */}
                         <div className={styles.eventLocation}>{event.location}</div>
-                        <div className={styles.eventAttendee}>{event.attendees?.length} attendee{event.attendees?.length > 1 && <>s</>} </div>
+                        {
+                            event.attendees &&
+                            <div className={styles.eventAttendee}>
+                                {event.attendees.length} attendee{event.attendees.length > 1 && <>s</>}
+                            </div>
+                        }
                     </Col>
                     <Col span={6} order={2}>
                         {event.imageUrls && event.imageUrls[0] && <img className={styles.eventImage} src={event.imageUrls[0]} alt=" " loading="lazy" />}
