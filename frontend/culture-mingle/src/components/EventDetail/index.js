@@ -49,8 +49,6 @@ const EventDetail = (props) => {
         fetchData();
     }, []);
 
-
-
     // Set description as paragraphs
     var paralists;
     if (description.includes("\n")) {
@@ -61,15 +59,6 @@ const EventDetail = (props) => {
     } else {
         paralists = <p>{description}</p>
     }
-
-    // Set attendees list
-    // const attendees = [
-    //     { avatar: "https://joesch.moe/api/v1/random?key=1", name: "Amber", identity: "Organizer" },
-    //     { avatar: "https://joesch.moe/api/v1/random?key=2", name: "Anqi", identity: "Member" },
-    //     { avatar: "https://joesch.moe/api/v1/random?key=3", name: "Aosen", identity: "Member" },
-    //     { avatar: "https://joesch.moe/api/v1/random?key=4", name: "Ryan", identity: "Member" },
-    //     { avatar: "https://joesch.moe/api/v1/random?key=5", name: "Yutong", identity: "Member" }
-    // ];
 
     return (
         <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
