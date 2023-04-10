@@ -38,7 +38,7 @@ const Profile = () => {
                         });
 
                         //for group:
-                        const requests2 = res.data.groups.map(id => axios.get(`http://localhost:8080/events/${id}`));
+                        const requests2 = res.data.groups.map(id => axios.get(`http://localhost:8080/groups/${id}`));
                         console.log(requests2);
                         Promise.all(requests2).then(responses2 => {
                             const newGroups = responses2.map((response2) => response2.data);
@@ -86,7 +86,7 @@ const Profile = () => {
                         ))}
                     </div> :
                     <div className={styles.noEvent}>
-                        Currently No Group! Click here to <NavLink to="/groups">Find more interesting Groups!</NavLink>
+                        Currently No Group! Click here to <NavLink to="/">Find more interesting Groups!</NavLink>
                     </div>}
             </div>
         </div>
