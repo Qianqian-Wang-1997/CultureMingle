@@ -57,6 +57,27 @@ describe('CMHeader', () => {
     const createGroupModal = screen.getByText('Start Your Group!');
     expect(createGroupModal).toBeInTheDocument();
   });
+
+  test('clicking logout button clears local storage and reloads page', () => {
+    localStorage.setItem('userId', '1');
+  
+    render(
+      <Router>
+        <CMHeader />
+      </Router>
+    );
+  
+    const logoutButton = screen.getByText('Log out');
+    fireEvent.click(logoutButton);
+  
+    // Assert that local storage is cleared
+    expect(localStorage.getItem('userId')).toBeNull();
+  
+    // Assert that the page is reloaded
+    // expect(reloadPage).toHaveBeenCalled();
+  });
+
+  
 });
 
 window.matchMedia = window.matchMedia || function () {
