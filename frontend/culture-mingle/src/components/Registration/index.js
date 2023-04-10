@@ -97,7 +97,7 @@ const Registration = () => {
                                     ]}
                                     onChange={(e) => setName(e.target.value)}
                                 >
-                                    <Input />
+                                    <Input data-testid="name"/>
                                 </Form.Item>
 
                                 {/* email */}
@@ -185,7 +185,7 @@ const Registration = () => {
                                 {/* Button */}
                                 <Form.Item {...tailLayout}>
                                     <div className={styles.hint}>{message}</div>
-                                    <Button type="primary" htmlType="submit" className={styles.buttonStyle} onSubmit = {handleSubmit}>
+                                    <Button type="primary" htmlType="submit" className={styles.buttonStyle} onSubmit = {handleSubmit} data-testid="submit">
                                         Submit
                                     </Button>
                                     <Button htmlType="button" onClick={onReset} style={{ background: "white" }} className={styles.buttonStyle}>
