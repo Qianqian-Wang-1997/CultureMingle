@@ -40,13 +40,16 @@ class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
+        System.out.println("ok");
     }
 
     @Test
     void authenticateUser() {
+        System.out.println("ok");
     }
 
     @Test
     void registerUser() {
+        System.out.println("ok");
     }
 }

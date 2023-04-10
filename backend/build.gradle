@@ -21,7 +21,7 @@ apply plugin: 'org.springframework.boot'
 // for spring dependencies)
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.junit.platform.gradle.plugin'
-apply plugin: 'jacoco'
+//apply plugin: 'jacoco'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -60,6 +60,11 @@ dependencies {
 	// Mockito
 	testImplementation 'org.mockito:mockito-core:3.12.4'
 	testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+	testImplementation 'com.github.fakemongo:fongo:2.2.0-RC1'
+
+	implementation 'org.mongodb:mongodb-driver-sync:4.4.2'
 }
 
 test {
@@ -70,22 +75,22 @@ test {
 //	finalizedBy jacocoTestReport
 }
 
-jacoco {
-	toolVersion = '0.8.7'
-	reportsDir = file("$buildDir/customJacocoReportDir")
-}
+//jacoco {
+//	toolVersion = '0.8.7'
+//	reportsDir = file("$buildDir/customJacocoReportDir")
+//}
 
-jacocoTestReport {
-	dependsOn junitPlatform
-	reports {
-		xml.enabled true
-		csv.enabled true
-		html.enabled true
-		html.destination "${buildDir}/jacocoHtml"
-		xml.destination "${buildDir}/jacocoXml.xml"
-		csv.destination "${buildDir}/jacocoCsv.csv"
-	}
-}
+//jacocoTestReport {
+//	dependsOn junitPlatform
+//	reports {
+//		xml.enabled true
+//		csv.enabled true
+//		html.enabled true
+//		html.destination "${buildDir}/jacocoHtml"
+//		xml.destination "${buildDir}/jacocoXml.xml"
+//		csv.destination "${buildDir}/jacocoCsv.csv"
+//	}
+//}
 
 /*
 	This is required to resolve a logging dependency conflict between the

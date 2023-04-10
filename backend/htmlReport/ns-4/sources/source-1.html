@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ResourceNotFoundException</title>
+  <title>Coverage Report > EventServiceImplTest</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,10 +18,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.ECE651.cultureMingle.exception</a>
+    <a href="../index.html">com.ECE651.cultureMingle.service</a>
 </div>
 
-<h1>Coverage Summary for Class: ResourceNotFoundException (com.ECE651.cultureMingle.exception)</h1>
+<h1>Coverage Summary for Class: EventServiceImplTest (com.ECE651.cultureMingle.service)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -40,29 +40,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ResourceNotFoundException</td>
+  <td class="name">EventServiceImplTest</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (10/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (10/10)
   </span>
 </td>
 </tr>
@@ -74,18 +74,50 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.ECE651.cultureMingle.exception;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ECE651.cultureMingle.service;
 &nbsp;
-&nbsp;import org.springframework.web.bind.annotation.ResponseStatus;
+&nbsp;import org.junit.jupiter.api.BeforeEach;
+&nbsp;import org.junit.jupiter.api.Test;
 &nbsp;
-&nbsp;@ResponseStatus
-&nbsp;public class ResourceNotFoundException extends RuntimeException {
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
 &nbsp;
-&nbsp;    private static final long serialVersionUID = 1L;
+<b class="fc">&nbsp;class EventServiceImplTest {</b>
 &nbsp;
-<b class="nc">&nbsp;    public ResourceNotFoundException(String message) { super(message); }</b>
+&nbsp;    @BeforeEach
+&nbsp;    void setUp() {
+<b class="fc">&nbsp;    }</b>
 &nbsp;
-<b class="nc">&nbsp;    public ResourceNotFoundException(String message, Throwable throwable) { super(message, throwable); }</b>
+&nbsp;    @Test
+&nbsp;    void createEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void updateEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void joinEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void hostEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void bindEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void getAllEvent() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void getEventById() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void deleteEvent() {
+<b class="fc">&nbsp;    }</b>
 &nbsp;}
 </code>
 </pre>
@@ -110,7 +142,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 13:25</div>
+    <div style="float:right;">generated on 2023-04-09 23:43</div>
 </div>
 </body>
 </html>
