@@ -1,6 +1,7 @@
 package com.ECE651.cultureMingle.controller;
 
-import com.ECE651.cultureMingle.service.GroupService;
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.ECE651.cultureMingle.service.GroupServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,42 +13,32 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = GroupController.class)
 @AutoConfigureMockMvc(addFilters = false)
 class GroupControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private GroupServiceImpl groupService;
+  @Autowired private MockMvc mockMvc;
+  @MockBean private GroupServiceImpl groupService;
 
-    @BeforeEach
-    void setUp() {
-    }
+  @BeforeEach
+  void setUp() {}
 
-    @Test
-    void getAllGroup() {
-    }
+  @Test
+  void getAllGroup() {}
 
-    @Test
-    void getGroupById() {
-    }
+  @Test
+  void getGroupById() {}
 
-    @Test
-    void createGroup() {
-    }
+  @Test
+  void createGroup() {}
 
-    @Test
-    void updateGroup() {
-    }
+  @Test
+  void updateGroup() {}
 
-    @Test
-    void joinGroup() {
-    }
+  @Test
+  void joinGroup() {}
 
-    @Test
-    void deleteGroup() {
-    }
+  @Test
+  void deleteGroup() {}
 }
